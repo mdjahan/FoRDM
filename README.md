@@ -6,6 +6,15 @@ Description...
 1. [Introduction](#introduction)  
 2. [Structure](#structure)  
 3. [Functions](#functions)  
+   - [build_fordm_table](#build_fordm_table)  
+   - [build_objectives](#build_objectives)  
+   - [discount_fun](#discount_fun)  
+   - [fordm_analysis_regret](#fordm_analysis_regret)  
+   - [fordm_analysis_qperform](#fordm_analysis_qperform)  
+   - [visualize_fordm_2d](#visualize_fordm_2d)  
+   - [visualize_fordm_3d](#visualize_fordm_3d)  
+   - [robustness_frontier_explorer](#robustness_frontier_explorer)  
+   - [visualize_rfe](#visualize_rfe)  
 4. [Example](#example)  
 5. [Citation](#citation)  
 6. [Funding](#funding)  
@@ -20,78 +29,142 @@ Description...
 Main implementation is R-package.... That file provides helpers to build input tables and objectives, run robustness analyses (regret and quantile-performance) and visualize results (2D/3D Pareto front) as well as robustness frontier exploration.
 
 ## Functions
-Main exported / useful functions (from RPackage/R/FoRDM.R). Descriptions and inputs below are provisional — use the in-file documentation for full details.
 
-- FoRDM::build_fordm_table  
-  - Description: Build FoRDM input table (formats a data.frame into the structure expected by analyses).  
-  - Inputs: data, management (column name), sow (state-of-world column name), time (time column name).  
-  - Returns: formatted list/data structure with data, mapping and objective names.
+### build_fordm_table
+Description  
+Transfers a provided data.frame into the FoRDM input format. Identifies management, SOW (state-of-world) and time columns; all other columns are treated as objectives.
 
-- FoRDM::build_objectives  
-  - Description: Create objectives table (names, direction, weights, time aggregation, discounting).  
-  - Inputs: obj_names, obj_dirs, obj_weights, obj_timeagg, obj_dr.  
-  - Returns: data.frame of objectives.
+Inputs
+- data: data.frame containing the input data.
+- management: name (string) of the management column.
+- sow: name (string) of the SOW (state-of-world) column.
+- time: name (string) of the time column.
 
-- FoRDM::discount_fun  
-  - Description: Helper to aggregate across time with optional discounting.  
-  - Inputs: x (values), t (time), disc_type ("sum" or "mean"), d (discount rate).
+Output
+- A list with:
+  - data: the original data.frame,
+  - mapping: list(management, sow, time),
+  - objectives: character vector of objective column names.
 
-- FoRDM::fordm_analysis_regret  
-  - Description: Regret-based robustness analysis (Regret Type 2 multi-objective).  
-  - Inputs: fordm_table (from build_fordm_table), objectives (from build_objectives), quantile (robustness quantile), sow_selection ("representative" or "mean").  
-  - Returns: list with optimal management, pareto_front_real, pareto_front_normalized.
+### build_objectives
+Description  
+Constructs an objectives data.frame specifying objective names, optimization direction, weights, time-aggregation method and discount rates for each objective.
 
-- FoRDM::fordm_analysis_qperform  
-  - Description: Quantile-performance robustness analysis (quantile-based per-objective).  
-  - Inputs: fordm_table, objectives, quantile (single or vector per objective).  
-  - Returns: list with optimal management, pareto_front_real, pareto_front_normalized.
+Inputs
+- obj_names: character vector of objective column names.
+- obj_dirs: character vector of "maximize" / "minimize" (default: all "maximize").
+- obj_weights: numeric vector of relative weights (must sum to 1).
+- obj_timeagg: character vector for time aggregation per objective ("mean" or "sum").
+- obj_dr: numeric vector of discount rates per objective.
 
-- FoRDM::visualize_fordm_2d  
-  - Description: 2D Pareto front plot for two selected objectives.  
-  - Inputs: analysis_output, x, y (objective names), values ("real" or "normalized").
+Output
+- A data.frame with columns: obj_names, obj_dirs, obj_weights, obj_timeagg, obj_dr.
 
-- FoRDM::visualize_fordm_3d  
-  - Description: 3D Pareto front plot (plotly).  
-  - Inputs: analysis_output, x, y, z, values ("real" or "normalized").
+### discount_fun
+Description  
+Internal helper to aggregate values across time with optional discounting. Supports "sum" or "mean" aggregation with a discount rate.
 
-- FoRDM::robustness_frontier_explorer  
-  - Description: Explore robustness frontier across quantile range; compute marginal benefits/losses and management changes.  
-  - Inputs: fordm_table, objectives, quantile_range, sow_selection, method ("regret" or "qperform").  
-  - Returns: data.frame of frontier results.
+Inputs
+- x: numeric vector of values across time for a single objective.
+- t: numeric vector of time indices corresponding to x.
+- disc_type: "sum" or "mean".
+- d: discount rate (numeric, e.g., 0.02).
 
-- FoRDM::visualize_rfe  
-  - Description: Visualization for robustness frontier explorer results.  
-  - Inputs: rfe_output (output of robustness_frontier_explorer).
+Output
+- Single numeric aggregated value (discounted sum or discounted mean).
+
+### fordm_analysis_regret
+Description  
+Performs regret-based (Regret Type 2) multi-objective robustness analysis. Aggregates across time (with discounting), computes global ideals/worsts, calculates per-SOW and per-management regrets, forms weighted scalar regrets and selects robust representative SOWs per management. Produces Pareto front (real and normalized) and identifies the optimal robust management.
+
+Inputs
+- fordm_table: output from build_fordm_table().
+- objectives: output from build_objectives().
+- quantile: numeric 0-1 robustness threshold (e.g., 0.05).
+- sow_selection: "representative" (default) or "mean" — how to choose SOW per management.
+
+Output
+- A list with:
+  - optimal: row for the selected optimal management (renamed column "management"),
+  - pareto_front_real: data.frame of Pareto front with real objective values,
+  - pareto_front_normalized: data.frame of Pareto front with objectives normalized to global ideal/worst.
+
+### fordm_analysis_qperform
+Description  
+Performs quantile-performance robustness analysis. Aggregates across time (with discounting), computes per-management quantile values for each objective, normalizes them and computes weighted scores to identify optimal management. Returns Pareto front in real (quantiles) and normalized forms.
+
+Inputs
+- fordm_table: output from build_fordm_table().
+- objectives: output from build_objectives().
+- quantile: single numeric or named vector of quantiles (0-1) per objective.
+
+Output
+- A list with:
+  - optimal: row for the selected optimal management (renamed column "management"),
+  - pareto_front_real: data.frame of Pareto front with quantile values (columns named as objectives),
+  - pareto_front_normalized: data.frame of Pareto front with normalized quantile values.
+
+### visualize_fordm_2d
+Description  
+Create a 2D ggplot2 scatter plot of the Pareto front for two selected objectives. Supports plotting real or normalized values.
+
+Inputs
+- analysis_output: result from fordm_analysis_regret() or fordm_analysis_qperform().
+- x: objective name for x-axis (string).
+- y: objective name for y-axis (string).
+- values: "real" (default) or "normalized".
+
+Output
+- A ggplot2 object (plot) showing the 2D Pareto front with management labels.
+
+### visualize_fordm_3d
+Description  
+Create a 3D interactive Pareto front plot using plotly for three selected objectives. Supports plotting real or normalized values.
+
+Inputs
+- analysis_output: result from fordm_analysis_regret() or fordm_analysis_qperform().
+- x, y, z: objective names for the three axes (strings).
+- values: "real" (default) or "normalized".
+
+Output
+- A plotly object (interactive 3D scatter) showing the Pareto front.
+
+### robustness_frontier_explorer
+Description  
+Explores the robustness frontier across a range of robustness (quantile) levels. Works with both regret-based and quantile-performance methods. Tracks which management is best at each robustness level, computes marginal benefits and losses when management changes, and returns a table of frontier results.
+
+Inputs
+- fordm_table: output from build_fordm_table().
+- objectives: output from build_objectives().
+- quantile_range: numeric vector length 2 with min and max robustness quantile (e.g., c(0, 0.5)).
+- sow_selection: "representative" or "mean".
+- method: "regret" (default) or "qperform".
+
+Output
+- data.frame with one row per robustness level (for the selected best management), including:
+  - management, robustness_level,
+  - objective columns (real or quantile-based as appropriate),
+  - marginal benefit and marginal loss columns for each objective (named <obj>_benefit and <obj>_loss).
+
+### visualize_rfe
+Description  
+Visualizes robustness frontier explorer output. Plots objective trajectories across robustness levels, annotates management labels and shows marginal benefits/losses when management changes.
+
+Inputs
+- rfe_output: data.frame returned by robustness_frontier_explorer().
+
+Output
+- A ggplot2 object visualizing the robustness frontier with annotations for benefits (→) and losses (←).
 
 ## Example
-Minimal example to run in R (adapt paths / package name as needed):
-
-```r
-# create toy data
-data <- data.frame(
-  management = rep(c("m1","m2"), each = 6),
-  sow = rep(c("s1","s2","s3"), times = 4),
-  time = rep(1:3, times = 4),
-  obj1 = runif(12, 0, 100),
-  obj2 = runif(12, 0, 100)
-)
-
-# prepare inputs
-fordm_tbl <- FoRDM::build_fordm_table(data, management = "management", sow = "sow", time = "time")
-objectives <- FoRDM::build_objectives(obj_names = c("obj1","obj2"))
-
-# run regret analysis
-res_regret <- FoRDM::fordm_analysis_regret(fordm_tbl, objectives, quantile = 0.05)
-
-# inspect result
-print(res_regret$optimal)
-```
+...
 
 ## Citation
-Provide suggested citation for the package or related publication here.
+Djahangard & Yousefpour 2025
 
 ## Funding
-List funding sources and acknowledgements here.
+This work was funded by the EU HORIZON project "eco2adapt"...  
+We also thank the EU ... project "DecisionES" for support...
 
 ## References
-Add bibliographic references relevant to FoRDM and robustness analysis here.
+...
