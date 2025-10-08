@@ -31,6 +31,9 @@ Description...
 Main implementation is R-package.... That file provides helpers to build input tables and objectives, run robustness analyses (regret and quantile-performance) and visualize results (2D/3D Pareto front) as well as robustness frontier exploration.
 
 ## Functions
+### Input file
+The input file ... forest simulation model output ... values of e.g., ecosystem services...  needs to be ... containing the columns...
+Example:...
 
 ### ***build_fordm_table()***
 Description  
