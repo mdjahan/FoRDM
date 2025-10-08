@@ -59,7 +59,7 @@ Constructs an objectives data.frame specifying objective names, optimization dir
 - *_obj.dr_*: numeric vector of discount rates per objective.
 
 **Output**
-- A data.frame with columns: *obj_names*, *obj_dirs*, *obj_weights*, *obj_timeagg*, *obj_dr*.
+- A data.frame with columns: *obj.names*, *obj.dirs*, *obj.weights*, *obj.timeagg*, *obj.dr*.
 
 ### ***fordm_analysis_regret()***
 Performs regret-based (Regret Type 2) multi-objective robustness analysis. Aggregates across time (with discounting), computes global ideals/worsts, calculates per-SOW and per-management regrets, forms weighted scalar regrets and selects robust representative SOWs per management. Produces Pareto front (real and normalized) and identifies the optimal robust management.
