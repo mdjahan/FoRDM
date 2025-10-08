@@ -7,8 +7,9 @@ Description...
 
 ## Table of contents
 1. [Introduction](#introduction)  
-2. [Structure](#structure)  
-3. [Functions](#functions)  
+2. [Structure](#structure)
+3. [Input file](#input file)  
+4. [Functions](#functions)  
    - [build_fordm_table](#build_fordm_table)  
    - [build_objectives](#build_objectives)
    - [fordm_analysis_regret](#fordm_analysis_regret)  
@@ -17,10 +18,10 @@ Description...
    - [visualize_fordm_3d](#visualize_fordm_3d)  
    - [robustness_frontier_explorer](#robustness_frontier_explorer)  
    - [visualize_rfe](#visualize_rfe)  
-4. [Example](#example)  
-5. [Citation](#citation)  
-6. [Funding](#funding)  
-7. [References](#references)
+5. [Example](#example)  
+6. [Citation](#citation)  
+7. [Funding](#funding)  
+8. [References](#references)
 
 ---
 
@@ -30,11 +31,11 @@ Description...
 ## Structure
 Main implementation is R-package.... That file provides helpers to build input tables and objectives, run robustness analyses (regret and quantile-performance) and visualize results (2D/3D Pareto front) as well as robustness frontier exploration.
 
-## Functions
-### Input file
+## Input file
 The input file ... forest simulation model output ... values of e.g., ecosystem services...  needs to be ... containing the columns...
 Example:...
 
+## Functions
 ### ***build_fordm_table()***
 Description  
 Transfers a provided data.frame into the FoRDM input format. Identifies management, SOW (state-of-world) and time columns; all other columns are treated as objectives.
