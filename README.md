@@ -1,3 +1,9 @@
+<h1 style="display:flex;align-items:center;justify-content:space-between;">
+  FoRDM
+  <img src="logo.png" alt="FoRDM logo" style="height:48px;margin-left:10px;">
+</h1>
+
+
 # FoRDM
 
 Description...
