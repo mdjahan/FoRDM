@@ -8,7 +8,7 @@ Description...
 ## Table of contents
 1. [Introduction](#introduction)  
 2. [Structure](#structure)
-3. [Input file](#input file)  
+3. [Input file](#input_file)  
 4. [Functions](#functions)  
    - [build_fordm_table](#build_fordm_table)  
    - [build_objectives](#build_objectives)
