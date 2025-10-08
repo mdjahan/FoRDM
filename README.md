@@ -52,11 +52,11 @@ Transfers a provided data.frame into the FoRDM input format. Identifies manageme
 Constructs an objectives data.frame specifying objective names, optimization direction, weights, time-aggregation method and discount rates for each objective.
 
 **Inputs**
-- *_obj_names_*: character vector of objective column names.  
-- *_obj_dirs_*: character vector of "maximize" / "minimize" (default: all "maximize").  
-- *_obj_weights_*: numeric vector of relative weights (must sum to 1).  
-- *_obj_timeagg_*: character vector for time aggregation per objective ("mean" or "sum").  
-- *_obj_dr_*: numeric vector of discount rates per objective.
+- *_obj.names_*: character vector of objective column names.  
+- *_obj.dirs_*: character vector of "maximize" / "minimize" (default: all "maximize").  
+- *_obj.weights_*: numeric vector of relative weights (must sum to 1).  
+- *_obj.timeagg_*: character vector for time aggregation per objective ("mean" or "sum").  
+- *_obj.dr_*: numeric vector of discount rates per objective.
 
 **Output**
 - A data.frame with columns: *obj_names*, *obj_dirs*, *obj_weights*, *obj_timeagg*, *obj_dr*.
@@ -65,36 +65,36 @@ Constructs an objectives data.frame specifying objective names, optimization dir
 Performs regret-based (Regret Type 2) multi-objective robustness analysis. Aggregates across time (with discounting), computes global ideals/worsts, calculates per-SOW and per-management regrets, forms weighted scalar regrets and selects robust representative SOWs per management. Produces Pareto front (real and normalized) and identifies the optimal robust management.
 
 **Inputs**
-- *_fordm_table_*: output from *build_fordm_table()*.  
+- *_fordm.table_*: output from *build_fordm_table()*.  
 - *_objectives_*: output from *build_objectives()*.  
 - *_quantile_*: numeric 0-1 robustness threshold (e.g., 0.05).  
-- *_sow_selection_*: "representative" (default) or "mean" — how to choose SOW per management.
+- *_sow.selection_*: "representative" (default) or "mean" — how to choose SOW per management.
 
 **Output**
 - A list with:  
   - *optimal*: row for the selected optimal management (renamed column "management"),  
-  - *pareto_front_real*: data.frame of Pareto front with real objective values,  
-  - *pareto_front_normalized*: data.frame of Pareto front with objectives normalized to global ideal/worst.
+  - *pareto.front.real*: data.frame of Pareto front with real objective values,  
+  - *pareto.front.normalized*: data.frame of Pareto front with objectives normalized to global ideal/worst.
 
 ### ***fordm_analysis_qperform()***
 Performs quantile-performance robustness analysis. Aggregates across time (with discounting), computes per-management quantile values for each objective, normalizes them and computes weighted scores to identify optimal management. Returns Pareto front in real (quantiles) and normalized forms.
 
 **Inputs**
-- *_fordm_table_*: output from *build_fordm_table()*.  
+- *_fordm.table_*: output from *build_fordm_table()*.  
 - *_objectives_*: output from *build_objectives()*.  
 - *_quantile_*: single numeric or named vector of quantiles (0-1) per objective.
 
 **Output**
 - A list with:  
   - *optimal*: row for the selected optimal management (renamed column "management"),  
-  - *pareto_front_real*: data.frame of Pareto front with quantile values (columns named as objectives),  
-  - *pareto_front_normalized*: data.frame of Pareto front with normalized quantile values.
+  - *pareto.front.real*: data.frame of Pareto front with quantile values (columns named as objectives),  
+  - *pareto.front.normalized*: data.frame of Pareto front with normalized quantile values.
 
 ### ***visualize_fordm_2d()***
 Create a 2D ggplot2 scatter plot of the Pareto front for two selected objectives. Supports plotting real or normalized values.
 
 **Inputs**
-- *_analysis_output_*: result from *fordm_analysis_regret()* or *fordm_analysis_qperform()*.  
+- *_analysis.output_*: result from *fordm_analysis_regret()* or *fordm_analysis_qperform()*.  
 - *_x_*: objective name for x-axis (string).  
 - *_y_*: objective name for y-axis (string).  
 - *_values_*: "real" (default) or "normalized".
@@ -106,7 +106,7 @@ Create a 2D ggplot2 scatter plot of the Pareto front for two selected objectives
 Create a 3D interactive Pareto front plot using plotly for three selected objectives. Supports plotting real or normalized values.
 
 **Inputs**
-- *_analysis_output_*: result from *fordm_analysis_regret()* or *fordm_analysis_qperform()*.  
+- *_analysis.output_*: result from *fordm_analysis_regret()* or *fordm_analysis_qperform()*.  
 - *_x_*, *_y_*, *_z_*: objective names for the three axes (strings).  
 - *_values_*: "real" (default) or "normalized".
 
@@ -117,17 +117,17 @@ Create a 3D interactive Pareto front plot using plotly for three selected object
 Explores the robustness frontier across a range of robustness (quantile) levels. Works with both regret-based and quantile-performance methods. Tracks which management is best at each robustness level, computes marginal benefits and losses when management changes, and returns a table of frontier results.
 
 **Inputs**
-- *_fordm_table_*: output from *build_fordm_table()*.  
+- *_fordm.table_*: output from *build_fordm_table()*.  
 - *_objectives_*: output from *build_objectives()*.  
-- *_quantile_range_*: numeric vector length 2 with min and max robustness quantile (e.g., c(0, 0.5)).  
-- *_sow_selection_*: "representative" or "mean".  
+- *_quantile.range_*: numeric vector length 2 with min and max robustness quantile (e.g., c(0, 0.5)).  
+- *_sow.selection_*: "representative" or "mean".  
 - *_method_*: "regret" (default) or "qperform".
 
 **Output**
 - data.frame with one row per robustness level (for the selected best management), including:  
-  - *management*, *robustness_level*,  
+  - *management*, *robustness.level*,  
   - objective columns (real or quantile-based as appropriate),  
-  - marginal benefit and marginal loss columns for each objective (named *<obj>_benefit* and *<obj>_loss*).
+  - marginal benefit and marginal loss columns for each objective (named *<obj>.benefit* and *<obj>.loss*).
 
 ### ***visualize_rfe()***
 Description  
