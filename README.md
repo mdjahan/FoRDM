@@ -185,6 +185,14 @@ output_regret <- fordm_analysis_regret(FoRDM_table, objectives, quantile = 0.01,
 
 # Inspect optimal robust management
 print(output_regret$optimal)
+# Inspect pareto front
+print(output_regret$pareto_front_real) #real values
+print(output_regret$pareto_front_normalized) #normalized values
+
+# Visualize output
+visualize_fordm_2d(output_fordm_regret,x="biodiversity",y="harvest_revenue",values = "real")
+visualize_fordm_3d(output_fordm_regret,x="biodiversity",y="standing_biomass",z="harvest_revenue",values = "real")
+
 ```
 
 ## Citation
