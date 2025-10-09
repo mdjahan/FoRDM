@@ -3,7 +3,7 @@
 </p>
 
 # FoRDM
-Description...
+**FoRDM** is a framework for multi-obejctive robust decision-making in forest research ... package provides tools for multi-objective robustness analysis, including regret-based and quantile-performance methods. It also includes visualization tools for exploring Pareto fronts and robustness frontiers.
 Current release is R-packe... also a simplified, user-friendly version as shiny app...
 
 ## Table of contents
@@ -39,112 +39,125 @@ Column file example:
 |------------|-----|------|--------|--------|-----|
 
 ## Functions
-### ***build_fordm_table()***
-Description  
-Transfers a provided data.frame into the FoRDM input format. Identifies management, SOW (state-of-world) and time columns; all other columns are treated as objectives.
+
+### **build_fordm_table()**
+Transforms a given `data.frame` into the required FoRDM input format. Identifies columns for management, SOW (state-of-world), and time, treating all other columns as objectives.
 
 **Inputs**
-- *_data_*: data.frame containing the input data.  
-- *_management_*: name (string) of the management column.  
-- *_sow_*: name (string) of the SOW (state-of-world) column.  
-- *_time_*: name (string) of the time column.
+- `data`: `data.frame` containing the input data.  
+- `management`: name (string) of the management column.  
+- `sow`: name (string) of the SOW (state-of-world) column.  
+- `time`: name (string) of the time column.
 
 **Output**
-- A list with:  
-  - *data*: the original data.frame,  
-  - *mapping*: list(management, sow, time),  
-  - *objectives*: character vector of objective column names.
+- A list containing:  
+  - `data`: the original `data.frame`,  
+  - `mapping`: a list with `management`, `sow`, and `time` column names,  
+  - `objectives`: a character vector of objective column names.
 
-### ***build_objectives()***
-Constructs an objectives data.frame specifying objective names, optimization direction, weights, time-aggregation method and discount rates for each objective.
+---
+
+### **build_objectives()**
+Creates an objectives `data.frame` that specifies the names, optimization directions, weights, time-aggregation methods, and discount rates for each objective.
 
 **Inputs**
-- *_obj.names_*: character vector of objective column names.  
-- *_obj.dirs_*: character vector of "maximize" / "minimize" (default: all "maximize").  
-- *_obj.weights_*: numeric vector of relative weights (must sum to 1).  
-- *_obj.timeagg_*: character vector for time aggregation per objective ("mean" or "sum").  
-- *_obj.dr_*: numeric vector of discount rates per objective.
+- `obj_names`: character vector of objective column names.  
+- `obj_dirs`: character vector specifying "maximize" or "minimize" for each objective (default: all "maximize").  
+- `obj_weights`: numeric vector of relative weights (must sum to 1).  
+- `obj_timeagg`: character vector specifying time aggregation methods ("mean" or "sum").  
+- `obj_dr`: numeric vector of discount rates for each objective.
 
 **Output**
-- A data.frame with columns: *obj.names*, *obj.dirs*, *obj.weights*, *obj.timeagg*, *obj.dr*.
+- A `data.frame` with columns: `obj_names`, `obj_dirs`, `obj_weights`, `obj_timeagg`, `obj_dr`.
 
-### ***fordm_analysis_regret()***
-Performs regret-based (Regret Type 2) multi-objective robustness analysis. Aggregates across time (with discounting), computes global ideals/worsts, calculates per-SOW and per-management regrets, forms weighted scalar regrets and selects robust representative SOWs per management. Produces Pareto front (real and normalized) and identifies the optimal robust management.
+---
+
+### **fordm_analysis_regret()**
+Conducts a regret-based (Regret Type 2) multi-objective robustness analysis. Aggregates objectives across time (with discounting), calculates global ideals/worsts, computes regrets for each SOW and management, and selects robust representative SOWs. Produces Pareto fronts (real and normalized) and identifies the optimal robust management.
 
 **Inputs**
-- *_fordm.table_*: output from *build_fordm_table()*.  
-- *_objectives_*: output from *build_objectives()*.  
-- *_quantile_*: numeric 0-1 robustness threshold (e.g., 0.05).  
-- *_sow.selection_*: "representative" (default) or "mean" — how to choose SOW per management.
+- `fordm_table`: output from `build_fordm_table()`.  
+- `objectives`: output from `build_objectives()`.  
+- `quantile`: numeric value (0-1) specifying the robustness threshold (e.g., 0.05).  
+- `sow_selection`: "representative" (default) or "mean" — determines how SOWs are selected per management.
 
 **Output**
-- A list with:  
-  - *optimal*: row for the selected optimal management (renamed column "management"),  
-  - *pareto.front.real*: data.frame of Pareto front with real objective values,  
-  - *pareto.front.normalized*: data.frame of Pareto front with objectives normalized to global ideal/worst.
+- A list containing:  
+  - `optimal`: row for the optimal management (renamed column "management"),  
+  - `pareto_front_real`: `data.frame` of the Pareto front with real objective values,  
+  - `pareto_front_normalized`: `data.frame` of the Pareto front with normalized objective values.
 
-### ***fordm_analysis_qperform()***
-Performs quantile-performance robustness analysis. Aggregates across time (with discounting), computes per-management quantile values for each objective, normalizes them and computes weighted scores to identify optimal management. Returns Pareto front in real (quantiles) and normalized forms.
+---
+
+### **fordm_analysis_qperform()**
+Performs a quantile-performance robustness analysis. Aggregates objectives across time (with discounting), calculates per-management quantile values for each objective, normalizes them, and computes weighted scores to identify the optimal management. Returns Pareto fronts in both real (quantile-based) and normalized forms.
 
 **Inputs**
-- *_fordm.table_*: output from *build_fordm_table()*.  
-- *_objectives_*: output from *build_objectives()*.  
-- *_quantile_*: single numeric or named vector of quantiles (0-1) per objective.
+- `fordm_table`: output from `build_fordm_table()`.  
+- `objectives`: output from `build_objectives()`.  
+- `quantile`: single numeric value or named vector of quantiles (0-1) for each objective.
 
 **Output**
-- A list with:  
-  - *optimal*: row for the selected optimal management (renamed column "management"),  
-  - *pareto.front.real*: data.frame of Pareto front with quantile values (columns named as objectives),  
-  - *pareto.front.normalized*: data.frame of Pareto front with normalized quantile values.
+- A list containing:  
+  - `optimal`: row for the optimal management (renamed column "management"),  
+  - `pareto_front_real`: `data.frame` of the Pareto front with quantile values (columns named as objectives),  
+  - `pareto_front_normalized`: `data.frame` of the Pareto front with normalized quantile values.
 
-### ***visualize_fordm_2d()***
-Create a 2D ggplot2 scatter plot of the Pareto front for two selected objectives. Supports plotting real or normalized values.
+---
+
+### **visualize_fordm_2d()**
+Generates a 2D scatter plot of the Pareto front for two selected objectives using `ggplot2`. Supports plotting real or normalized values.
 
 **Inputs**
-- *_analysis.output_*: result from *fordm_analysis_regret()* or *fordm_analysis_qperform()*.  
-- *_x_*: objective name for x-axis (string).  
-- *_y_*: objective name for y-axis (string).  
-- *_values_*: "real" (default) or "normalized".
+- `analysis_output`: result from `fordm_analysis_regret()` or `fordm_analysis_qperform()`.  
+- `x`: name of the objective for the x-axis (string).  
+- `y`: name of the objective for the y-axis (string).  
+- `values`: "real" (default) or "normalized".
 
 **Output**
-- A ggplot2 object (plot) showing the 2D Pareto front with management labels.
+- A `ggplot2` object visualizing the 2D Pareto front with management labels.
 
-### ***visualize_fordm_3d()***
-Create a 3D interactive Pareto front plot using plotly for three selected objectives. Supports plotting real or normalized values.
+---
+
+### **visualize_fordm_3d()**
+Creates an interactive 3D Pareto front plot using `plotly` for three selected objectives. Supports plotting real or normalized values.
 
 **Inputs**
-- *_analysis.output_*: result from *fordm_analysis_regret()* or *fordm_analysis_qperform()*.  
-- *_x_*, *_y_*, *_z_*: objective names for the three axes (strings).  
-- *_values_*: "real" (default) or "normalized".
+- `analysis_output`: result from `fordm_analysis_regret()` or `fordm_analysis_qperform()`.  
+- `x`, `y`, `z`: names of the objectives for the three axes (strings).  
+- `values`: "real" (default) or "normalized".
 
 **Output**
-- A plotly object (interactive 3D scatter) showing the Pareto front.
+- A `plotly` object (interactive 3D scatter plot) visualizing the Pareto front.
 
-### ***robustness_frontier_explorer()***
-Explores the robustness frontier across a range of robustness (quantile) levels. Works with both regret-based and quantile-performance methods. Tracks which management is best at each robustness level, computes marginal benefits and losses when management changes, and returns a table of frontier results.
+---
+
+### **robustness_frontier_explorer()**
+Analyzes the robustness frontier across a range of robustness (quantile) levels. Supports both regret-based and quantile-performance methods. Tracks the best management at each robustness level, computes marginal benefits and losses when management changes, and returns a table of frontier results.
 
 **Inputs**
-- *_fordm.table_*: output from *build_fordm_table()*.  
-- *_objectives_*: output from *build_objectives()*.  
-- *_quantile.range_*: numeric vector length 2 with min and max robustness quantile (e.g., c(0, 0.5)).  
-- *_sow.selection_*: "representative" or "mean".  
-- *_method_*: "regret" (default) or "qperform".
+- `fordm_table`: output from `build_fordm_table()`.  
+- `objectives`: output from `build_objectives()`.  
+- `quantile_range`: numeric vector of length 2 specifying the minimum and maximum robustness quantiles (e.g., `c(0, 0.5)`).  
+- `sow_selection`: "representative" or "mean".  
+- `method`: "regret" (default) or "qperform".
 
 **Output**
-- data.frame with one row per robustness level (for the selected best management), including:  
-  - *management*, *robustness.level*,  
+- A `data.frame` with one row per robustness level (for the selected best management), including:  
+  - `management`, `robustness_level`,  
   - objective columns (real or quantile-based as appropriate),  
-  - marginal benefit and marginal loss columns for each objective (named *<obj>.benefit* and *<obj>.loss*).
+  - marginal benefit and marginal loss columns for each objective (e.g., `<obj>_benefit` and `<obj>_loss`).
 
-### ***visualize_rfe()***
-Description  
-Visualizes robustness frontier explorer output. Plots objective trajectories across robustness levels, annotates management labels and shows marginal benefits/losses when management changes.
+---
+
+### **visualize_rfe()**
+Visualizes the output of the robustness frontier explorer. Plots objective trajectories across robustness levels, annotates management labels, and highlights marginal benefits (→) and losses (←) when management changes.
 
 **Inputs**
-- *_rfe_output_*: data.frame returned by *robustness_frontier_explorer()*.
+- `rfe_output`: `data.frame` returned by `robustness_frontier_explorer()`.
 
 **Output**
-- A ggplot2 object visualizing the robustness frontier with annotations for benefits (→) and losses (←).
+- A `ggplot2` object visualizing the robustness frontier with annotations for benefits and losses.
 
 ## Example
 ...
