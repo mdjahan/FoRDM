@@ -3,7 +3,7 @@
 </p>
 
 # FoRDM
-**FoRDM** is a framework for multi-obejctive robust decision-making in forest research ... package provides tools for multi-objective robustness analysis, including regret-based and quantile-performance methods. It also includes visualization tools for exploring Pareto fronts and robustness frontiers.
+**Fo**rest research related multi-objective **R**obust **D**ecision **M**aking (**FoRDM**) ... package provides tools for multi-objective robustness analysis, including regret-based and quantile-performance methods. It also includes visualization tools for exploring Pareto fronts and robustness frontiers.
 Current release is R-packe... also a simplified, user-friendly version as shiny app...
 
 ## Table of contents
@@ -160,7 +160,32 @@ Visualizes the output of the robustness frontier explorer. Plots objective traje
 - A `ggplot2` object visualizing the robustness frontier with annotations for benefits and losses.
 
 ## Example
-...
+
+```r
+# Load package
+library(FoRDM)
+
+# Load your data (replace with your path)
+df <- read.csv("YOUR_DATA.csv")
+
+# Build FoRDM table (columns in your data must match)
+FoRDM_table <- build_fordm_table(df, management = "management", sow = "scenario", time = "year")
+
+# Define objectives
+objectives <- build_objectives(
+  obj_names   = c("standing_biomass", "biodiversity", "harvest_revenue"),
+  obj_dirs    = c("maximize", "maximize", "maximize"),
+  obj_weights = c(0.2, 0.2, 0.6),
+  obj_timeagg = c("mean", "mean", "sum"),
+  obj_dr      = c(0, 0, 0.02)
+)
+
+# Run regret-based FoRDM analysis (fordm_analysis_qperform 
+output_regret <- fordm_analysis_regret(FoRDM_table, objectives, quantile = 0.01, sow_selection = "mean")
+
+# Inspect optimal robust management
+print(output_regret$optimal)
+```
 
 ## Citation
 Djahangard & Yousefpour 2025
