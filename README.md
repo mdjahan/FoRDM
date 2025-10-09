@@ -45,9 +45,9 @@ Transforms a given `data.frame` into the required FoRDM input format. Identifies
 
 **Inputs**
 - `data`: `data.frame` containing the input data.  
-- `management`: name (string) of the management column.  
-- `sow`: name (string) of the SOW (state-of-world) column.  
-- `time`: name (string) of the time column.
+- `management`: name of the management column in the input data.  
+- `sow`: name of the SOW (state-of-world) column in the input data.  
+- `time`: name of the time column in the input data.
 
 **Output**
 - A list containing:  
@@ -58,14 +58,14 @@ Transforms a given `data.frame` into the required FoRDM input format. Identifies
 ---
 
 ### **build_objectives()**
-Creates an objectives `data.frame` that specifies the names, optimization directions, weights, time-aggregation methods, and discount rates for each objective.
+Creates an objectives `data.frame` to define the names, optimization directions, weights, time-aggregation methods, and discount rates for each objective to be included in the FoRDM analysis.
 
 **Inputs**
 - `obj_names`: character vector of objective column names.  
-- `obj_dirs`: character vector specifying "maximize" or "minimize" for each objective (default: all "maximize").  
+- `obj_dirs`: character vector specifying "maximize" or "minimize" for each objective (default: "maximize").  
 - `obj_weights`: numeric vector of relative weights (must sum to 1).  
 - `obj_timeagg`: character vector specifying time aggregation methods ("mean" or "sum").  
-- `obj_dr`: numeric vector of discount rates for each objective.
+- `obj_dr`: numeric vector representing discount rates for each objective (e.g., 0.02 indicates a 2% rate) applied during time aggregation.
 
 **Output**
 - A `data.frame` with columns: `obj_names`, `obj_dirs`, `obj_weights`, `obj_timeagg`, `obj_dr`.
@@ -73,13 +73,13 @@ Creates an objectives `data.frame` that specifies the names, optimization direct
 ---
 
 ### **fordm_analysis_regret()**
-Conducts a regret-based (Regret Type 2) multi-objective robustness analysis. Aggregates objectives across time (with discounting), calculates global ideals/worsts, computes regrets for each SOW and management, and selects robust representative SOWs. Produces Pareto fronts (real and normalized) and identifies the optimal robust management.
+Conducts a regret-based (Regret Type 2) multi-objective robustness analysis. Aggregates objectives across time (with discounting), computes regrets for each SOW and management and selects robust representative SOWs. Produces Pareto fronts (real and normalized) and identifies the optimal robust management.
 
 **Inputs**
 - `fordm_table`: output from `build_fordm_table()`.  
 - `objectives`: output from `build_objectives()`.  
-- `quantile`: numeric value (0-1) specifying the robustness threshold (e.g., 0.05).  
-- `sow_selection`: "representative" (default) or "mean" — determines how SOWs are selected per management.
+- `quantile`: numeric value (0-1) specifying the robustness threshold (e.g., 0.05 indicates a robustness level of 95%).  
+- `sow_selection`: "representative" (default) or "mean" — determines how robustness across SOWs are calculated per management. "representative": Selects the SOW closest to the user-defined quantile as a representative. "mean": Uses the mean across all SOWs below the quantile.
 
 **Output**
 - A list containing:  
