@@ -35,8 +35,8 @@ Main implementation is R-package.... That file provides helpers to build input t
 ## Input file
 The input file (.csv-file)... forest simulation model output ... values of e.g., ecosystem services...  needs to be ... containing the columns...
 Column file example:
-| management | sow | time | value1 | value2 | ... |
-|------------|-----|------|--------|--------|-----|
+| management | sow | time | values_objective1 | values_objective2 | ... |
+|------------|-----|------|-------------------|-------------------|-----|
 
 ## Functions
 
