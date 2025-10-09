@@ -189,7 +189,7 @@ print(output_regret$optimal)
 print(output_regret$pareto_front_real) #real values
 print(output_regret$pareto_front_normalized) #normalized values
 
-# Visualize output
+# Visualize FoRDM analysis output
 visualize_fordm_2d(output_fordm_regret,x="biodiversity",y="harvest_revenue",values = "real")
 visualize_fordm_3d(output_fordm_regret,x="biodiversity",y="standing_biomass",z="harvest_revenue",values = "real")
 
