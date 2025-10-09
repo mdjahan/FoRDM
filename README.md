@@ -173,14 +173,14 @@ FoRDM_table <- build_fordm_table(df, management = "management", sow = "scenario"
 
 # Define objectives
 objectives <- build_objectives(
-  obj_names   = c("standing_biomass", "biodiversity", "harvest_revenue"),
+  obj_names   = c("standing_biomass", "biodiversity", "harvest_revenue"), #identical with the column names in your input data
   obj_dirs    = c("maximize", "maximize", "maximize"),
   obj_weights = c(0.2, 0.2, 0.6),
   obj_timeagg = c("mean", "mean", "sum"),
   obj_dr      = c(0, 0, 0.02)
 )
 
-# Run regret-based FoRDM analysis (fordm_analysis_qperform 
+# Run regret-based FoRDM analysis (quantile performance analysis follows the same procedure)
 output_regret <- fordm_analysis_regret(FoRDM_table, objectives, quantile = 0.01, sow_selection = "mean")
 
 # Inspect optimal robust management
