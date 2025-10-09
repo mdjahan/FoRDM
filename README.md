@@ -4,6 +4,7 @@
 
 # FoRDM
 Description...
+Current release is R-packe... also a simplified, user-friendly version as shiny app...
 
 ## Table of contents
 1. [Introduction](#introduction)  
