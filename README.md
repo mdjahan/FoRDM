@@ -163,7 +163,7 @@ Visualizes the output of the robustness frontier explorer. Plots objective traje
 - `rfe_output`: `data.frame` returned by `robustness_frontier_explorer()`.
 
 **Output**
-- A `ggplot2` object visualizing the robustness frontier with annotations for benefits and losses.
+- A `ggplot2` plot visualizing the robustness frontier with annotations for benefits and losses.
 
 **Example plot:**
 
@@ -203,6 +203,16 @@ print(output_regret$pareto_front_normalized) #normalized values
 # Visualize FoRDM analysis output
 visualize_fordm_2d(output_fordm_regret,x="biodiversity",y="harvest_revenue",values = "real")
 visualize_fordm_3d(output_fordm_regret,x="biodiversity",y="standing_biomass",z="harvest_revenue",values = "real")
+
+# Robustness frontier exploration
+output_rfe <- robustness_frontier_explorer(fordm_table = FoRDM_table,
+                                           objectives = objectives,
+                                           quantile_range = c(0.0,0.5),
+                                           sow_selection = "mean",
+                                           method = "regret")
+
+# Visualize robustness frontier exploration analysis
+visualize_rfe(output_rfe)
 
 ```
 
