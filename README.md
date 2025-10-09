@@ -99,9 +99,9 @@ Performs a quantile-performance robustness analysis. Aggregates objectives acros
 
 **Output**
 - A list containing:  
-  - `optimal`: row for the optimal management (renamed column "management"),  
-  - `pareto_front_real`: `data.frame` of the Pareto front with quantile values (columns named as objectives),  
-  - `pareto_front_normalized`: `data.frame` of the Pareto front with normalized quantile values.
+  - `optimal`: optimal management at the selected robustness level with objective real values.  
+  - `pareto_front_real`: the Pareto front of management options with real values of the selected robustness level,  
+  - `pareto_front_normalized`: the Pareto front of management options with normalized values of the selected robustness level.
 
 ---
 
