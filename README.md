@@ -115,8 +115,10 @@ Generates a 2D scatter plot of the Pareto front for two selected objectives usin
 - `values`: "real" (default) or "normalized".
 
 **Output**
-- A `ggplot2` object visualizing the 2D Pareto front with management labels.
+- A `ggplot2` plot, visualizing the 2D Pareto front with management labels.
 
+**Example plot:**
+![2D plot example](2dplot.png)
 ---
 
 ### **visualize_fordm_3d()**
@@ -128,7 +130,7 @@ Creates an interactive 3D Pareto front plot using `plotly` for three selected ob
 - `values`: "real" (default) or "normalized".
 
 **Output**
-- A `plotly` object (interactive 3D scatter plot) visualizing the Pareto front.
+- An `plotly` plot (interactive 3D scatter plot) visualizing the Pareto front.
 
 ---
 
