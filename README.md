@@ -99,9 +99,9 @@ Performs a quantile-performance robustness analysis. Aggregates objectives acros
 
 **Output**
 - A list containing:  
-  - `optimal`: optimal management at the selected robustness level with objective real values.  
-  - `pareto_front_real`: the Pareto front of management options with real values of the selected robustness level,  
-  - `pareto_front_normalized`: the Pareto front of management options with normalized values of the selected robustness level.
+  - `optimal`: the optimal management strategy at the specified robustness level, including real objective values,
+  - `pareto_front_real`: the Pareto front of management strategies with real objective values at the specified robustness level,
+  - `pareto_front_normalized`: the Pareto front of management strategies with normalized objective values at the specified robustness level.
 
 ---
 
