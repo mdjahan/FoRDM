@@ -4,7 +4,7 @@
 
 # FoRDM
 **Fo**rest research related multi-objective **R**obust **D**ecision **M**aking (**FoRDM**) ... package provides tools for multi-objective robustness analysis, including regret-based and quantile-performance methods. It also includes visualization tools for exploring Pareto fronts and robustness frontiers.
-Current release is R-packe... also a simplified, user-friendly version as shiny app...
+Current release is R-package... also a simplified, user-friendly version as shiny app...
 
 ## Table of contents
 1. [Introduction](#introduction)  
