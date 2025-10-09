@@ -42,7 +42,7 @@ Column file example:
 ## Functions
 
 ### **build_fordm_table()**
-Transforms a given `data.frame` into the required FoRDM input format. Identifies columns for management, SOW (state-of-world), and time, treating all other columns as objectives.
+Transforms a given input file (`data.frame`) into the required FoRDM input format. Identifies columns for management, SOW (state-of-world), and time, treating all other columns as objectives.
 
 **Inputs**
 - `data`: `data.frame` containing the input data.  
