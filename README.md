@@ -1,5 +1,5 @@
 <p align="right">
-  <img src="logo.png" alt="FoRDM logo" width="200" />
+  <img src="figures/logo.png" alt="FoRDM logo" width="200" />
 </p>
 
 # FoRDM
@@ -119,7 +119,7 @@ Generates a 2D scatter plot of the Pareto front for two selected objectives usin
 
 **Example plot:**
 
-![2D plot example](2dplot.png)
+![2D plot example](figures/2dplot.png)
 ---
 
 ### **visualize_fordm_3d()**
@@ -135,7 +135,7 @@ Creates an interactive 3D Pareto front plot using `plotly` for three selected ob
 
 **Example plot:**
 
-![3D plot example](3dplot.png)
+![3D plot example](figures/3dplot.png)
 ---
 
 ### **robustness_frontier_explorer()**
@@ -165,6 +165,11 @@ Visualizes the output of the robustness frontier explorer. Plots objective traje
 **Output**
 - A `ggplot2` object visualizing the robustness frontier with annotations for benefits and losses.
 
+**Example plot:**
+
+![rfe plot example](figures/rfeplot.png)
+
+---
 ## Example
 
 ```r
