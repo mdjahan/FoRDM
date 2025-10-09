@@ -32,6 +32,8 @@ Current release is R-package... also a simplified, user-friendly version as shin
 ## Structure
 Main implementation is R-package.... That file provides helpers to build input tables and objectives, run robustness analyses (regret and quantile-performance) and visualize results (2D/3D Pareto front) as well as robustness frontier exploration.
 
+![structure](figures/structure.svg)
+
 ## Input file
 The input file (.csv-file)... forest simulation model output ... values of e.g., ecosystem services...  needs to be ... containing the columns...
 Column file example:
