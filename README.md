@@ -118,6 +118,7 @@ Generates a 2D scatter plot of the Pareto front for two selected objectives usin
 - A `ggplot2` plot, visualizing the 2D Pareto front with management labels.
 
 **Example plot:**
+
 ![2D plot example](2dplot.png)
 ---
 
@@ -132,6 +133,9 @@ Creates an interactive 3D Pareto front plot using `plotly` for three selected ob
 **Output**
 - An `plotly` plot (interactive 3D scatter plot) visualizing the Pareto front.
 
+**Example plot:**
+
+![3D plot example](3dplot.png)
 ---
 
 ### **robustness_frontier_explorer()**
