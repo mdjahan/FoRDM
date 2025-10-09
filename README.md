@@ -1,8 +1,8 @@
-<p align="right">
-  <img src="figures/logo.png" alt="FoRDM logo" width="200" />
-</p>
+<h1 style="margin: 0;">
+  FoRDM
+  <img src="figures/logo.png" alt="FoRDM logo" width="120" style="float: right; margin-left: 10px;">
+</h1>
 
-# FoRDM
 **Fo**rest research related multi-objective **R**obust **D**ecision **M**aking (**FoRDM**) ... package provides tools for multi-objective robustness analysis, including regret-based and quantile-performance methods. It also includes visualization tools for exploring Pareto fronts and robustness frontiers.
 Current release is R-package... also a simplified, user-friendly version as shiny app...
 
