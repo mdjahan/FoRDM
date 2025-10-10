@@ -26,6 +26,7 @@ Current release is R-package... also a simplified, user-friendly version as shin
 ---
 
 ## Introduction
+Ecosystems, and especially forests, are increasingly threatened by climate change, making adaptive management essential to secure the multitude of provided ecosystem services in the future.
 ...
 
 ## Structure
