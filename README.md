@@ -66,7 +66,7 @@ Creates an objectives `data.frame` to define the names, optimization directions,
 - `obj_names`: character vector of objective column names.  
 - `obj_dirs`: character vector specifying "maximize" or "minimize" for each objective (default: "maximize").  
 - `obj_weights`: numeric vector of relative weights (must sum to 1).  
-- `obj_timeagg`: character vector specifying time aggregation methods ("mean" or "sum").  
+- `obj_timeagg`: character vector specifying time aggregation methods ("mean", "sum", "max","min"). Discounting is only applied to "mean" and "sum".  
 - `obj_dr`: numeric vector representing discount rates for each objective (e.g., 0.02 indicates a 2% rate) applied during time aggregation.
 
 **Output**
