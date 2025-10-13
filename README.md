@@ -2,7 +2,7 @@
 
 <img src="figures/logo.png" alt="FoRDM logo" width="250" style="display: block; margin: 30px auto 0 auto;">
 
-**Fo**rest related multi-objective **R**obust **D**ecision **M**aking (**FoRDM**) ... package provides tools for multi-objective robustness analysis, including regret-based and quantile-performance methods. It also includes visualization tools for exploring Pareto fronts and robustness frontiers.
+**Fo**rest related Many-Objective **R**obust **D**ecision **M**aking (**FoRDM**) ... package provides tools for Many-Objective Robustness analysis, including regret-based and quantile-performance methods. It also includes visualization tools for exploring Pareto fronts and robustness frontiers.
 Current release is R-package...  a simplified, easy-to-use web-application available [here](https://marcdjahangard.shinyapps.io/fordm_app/).
 
 ##
@@ -75,7 +75,7 @@ Creates an objectives `data.frame` to define the names, optimization directions,
 ---
 
 ### **fordm_analysis_regret()**
-Conducts a regret-based (Regret Type 2) multi-objective robustness analysis. Aggregates objectives across time (with discounting), computes regrets for each SOW and management and selects robust representative SOWs. Produces Pareto fronts (real and normalized) and identifies the optimal robust management.
+Conducts a regret-based (Regret Type 2) Many-Objective robustness analysis. Aggregates objectives across time (with discounting), computes regrets for each SOW and management and selects robust representative SOWs. Produces Pareto fronts (real and normalized) and identifies the optimal robust management.
 
 **Inputs**
 - `fordm_table`: output from `build_fordm_table()`.  
