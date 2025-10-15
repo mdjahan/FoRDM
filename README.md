@@ -2,9 +2,7 @@
 
 <img src="figures/logo.png" alt="FoRDM logo" width="250" style="display: block; margin: 30px auto 0 auto;">
 
-**Fo**rest related Many-Objective **R**obust **D**ecision **M**aking (**FoRDM**) is an R-based toolkit for supporting robust forest management under deep uncertainty. As forests are facing unprecedented climate change impacts, complex dynamics, and multiple, often conflicting objectives
-
-FoRDM evaluate alternative management strategies across multiple criteria and plausible futures, identifying robust solutions and visualizing trade-offs via Pareto and robustness fronts. The toolkit includes regret-based and quantile-performance methods, flexible objective weighting, and interactive visualization. Current release is R-package...  a simplified, easy-to-use web-application available [here](https://marcdjahangard.shinyapps.io/fordm_app/).
+**Fo**rest related Many-Objective **R**obust **D**ecision **M**aking (**FoRDM**) is an R-based toolkit for supporting robust forest management under deep uncertainty. Forests are facing unprecedented climate change impacts, complex dynamics, and multiple, often conflicting objectives, making management under uncertainty challenging. FoRDM uses input from modelling and evaluates alternative management strategies across multiple criteria and plausible futures, identifying robust solutions and visualizing trade-offs via Pareto and robustness fronts. The toolkit includes regret-based and quantile-performance methods, flexible objective weighting, and interactive visualization. Current release is R-package...  a simplified, easy-to-use web-application available [here](https://marcdjahangard.shinyapps.io/fordm_app/).
 
 ##
 1. [Introduction](#introduction)  
