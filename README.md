@@ -79,7 +79,7 @@ Conducts a regret-based (Regret Type 2) Many-Objective robustness analysis. Aggr
 **Inputs**
 - `fordm_table`: output from `build_fordm_table()`.  
 - `objectives`: output from `build_objectives()`.  
-- `quantile`: numeric value (0-1) specifying the robustness threshold (e.g., 0.05 indicates a robustness level of 95%).  
+- `robustness`: numeric value (0-1) specifying the robustness level (e.g., 0.95 indicates a robustness level of 95%).  
 - `sow_selection`: "representative" (default) or "mean" — determines how robustness across SOWs are calculated per management. "representative": Selects the SOW closest to the user-defined quantile as a representative. "mean": Uses the mean across all SOWs below the quantile.
 
 **Output**
@@ -96,7 +96,7 @@ Performs a quantile-performance robustness analysis. Aggregates objectives acros
 **Inputs**
 - `fordm_table`: output from `build_fordm_table()`.  
 - `objectives`: output from `build_objectives()`.  
-- `quantile`: single numeric value or named vector of quantiles (0-1) for each objective.
+- `robustness`: numeric value (0-1) specifying the robustness level (e.g., 0.95 indicates a robustness level of 95%). Can be also a vector of robustness level for each objective individually.
 
 **Output**
 - A list containing:  
@@ -145,7 +145,7 @@ Analyzes the robustness frontier across a range of robustness (quantile) levels.
 **Inputs**
 - `fordm_table`: output from `build_fordm_table()`.  
 - `objectives`: output from `build_objectives()`.  
-- `quantile_range`: numeric vector of length 2 specifying the minimum and maximum robustness quantiles (e.g., `c(0, 0.5)`).  
+- `robustness_range`: Range in robustness level for which the frontier exploration is applied (e.g., c(0.5,1.0) means 50% - 100%).
 - `sow_selection`: "representative" or "mean".  
 - `method`: "regret" (default) or "qperform".
 
@@ -153,7 +153,7 @@ Analyzes the robustness frontier across a range of robustness (quantile) levels.
 - A `data.frame` with one row per robustness level (for the selected best management), including:  
   - `management`, `robustness_level`,  
   - objective columns (real or quantile-based as appropriate),  
-  - marginal benefit and marginal loss columns for each objective (e.g., `<obj>_benefit` and `<obj>_loss`).
+  - marginal benefit and marginal loss columns for each objective (e.g., `<obj>_benefit` and `<obj>_loss`). Marginal benefit: The improvement in each objective when switching to the new best management after relaxing robustness. Marginal loss: The potential loss in each objective if reduced robustness leads to a riskier outcome—showing what you could lose by leaving the previous best management.
 
 ---
 
@@ -193,7 +193,7 @@ objectives <- build_objectives(
 )
 
 # Run regret-based FoRDM analysis (quantile performance analysis follows the same procedure)
-output_regret <- fordm_analysis_regret(FoRDM_table, objectives, quantile = 0.01, sow_selection = "mean")
+output_regret <- fordm_analysis_regret(FoRDM_table, objectives, quantile = 0.9, sow_selection = "mean")
 
 # Inspect optimal robust management
 print(output_regret$optimal)
@@ -208,7 +208,7 @@ visualize_fordm_3d(output_fordm_regret,x="biodiversity",y="standing_biomass",z="
 # Robustness frontier exploration
 output_rfe <- robustness_frontier_explorer(fordm_table = FoRDM_table,
                                            objectives = objectives,
-                                           quantile_range = c(0.0,0.5),
+                                           quantile_range = c(0.5,1.0),
                                            sow_selection = "mean",
                                            method = "regret")
 
