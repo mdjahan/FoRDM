@@ -2,21 +2,23 @@
 
 <img src="figures/logo.png" alt="FoRDM logo" width="250" style="display: block; margin: 30px auto 0 auto;">
 
-**Fo**rest related Many-Objective **R**obust **D**ecision **M**aking (**FoRDM**) is an R-based toolkit for supporting robust forest management under deep uncertainty. Forests are facing unprecedented changes from global warming and disturbances, together with often conflicting management objectives, making decision-making under uncertainty challenging. FoRDM takes input from modelling to evaluate alternative management strategies across multiple objectives and plausible futures, identifying robust solutions and visualizing trade-offs through Pareto and robustness fronts. The toolkit includes regret-based and quantile-performance methods, flexible objective weighting, and interactive visualization. The current release is available as an R package and as a simplified, easy-to-use web application available [here](https://marcdjahangard.shinyapps.io/fordm_app/).
+**Fo**rest related Many-Objective **R**obust **D**ecision **M**aking (**FoRDM**) is an R-based toolkit for supporting robust forest management under deep uncertainty. Forests are facing unprecedented changes from global warming and disturbances, together with often conflicting management objectives, making decision-making under uncertainty challenging. FoRDM takes input from modelling to evaluate alternative management strategies across multiple objectives and plausible futures, identifying robust solutions and visualizing trade-offs through Pareto and robustness fronts. The toolkit includes regret-based and satisficing-based robustness analysis, flexible objective weighting, and interactive visualization. The current release is available as an R package and as a simplified, easy-to-use web application available [here](https://marcdjahangard.shinyapps.io/fordm_app/).
 
 ##
 1. [Introduction](#introduction)  
 2. [Structure](#structure)
 3. [Input file](#input-file)  
 4. [Functions](#functions)  
-   - [build_fordm_table](#build_fordm_table)  
-   - [build_objectives](#build_objectives)
-   - [fordm_analysis_regret](#fordm_analysis_regret)  
-   - [fordm_analysis_qperform](#fordm_analysis_qperform)  
-   - [visualize_fordm_2d](#visualize_fordm_2d)  
-   - [visualize_fordm_3d](#visualize_fordm_3d)  
-   - [robustness_frontier_explorer](#robustness_frontier_explorer)  
-   - [visualize_rfe](#visualize_rfe)  
+   - [build_fordm_table](#build_fordm_table)
+   - [build_objectives_regret](#build_objectives_regret)
+   - [build_objectives_satisficing](#build_objectives_satisficing)
+   - [fordm_analysis_regret](#fordm_analysis_regret)
+   - [fordm_analysis_satisficing](#fordm_analysis_satisficing)
+   - [visualize_fordm_2d](#visualize_fordm_2d)
+   - [visualize_fordm_3d](#visualize_fordm_3d)
+   - [robustness_frontier_regret](#robustness_frontier_regret)
+   - [robustness_frontier_satisficing](#robustness_frontier_satisficing)
+   - [visualize_rfe](#visualize_rfe)
 5. [Example](#example)  
 6. [Citation](#citation)  
 7. [Funding](#funding)  
@@ -25,19 +27,20 @@
 ---
 
 ## Introduction
-Ecosystems, and especially forests, are increasingly threatened by climate change, making adaptive management essential to secure the multitude of provided ecosystem services in the future.
+Ecosystems, especially forests, are increasingly threatened by climate change, making adaptive management essential to secure the multitude of provided ecosystem services in the future.
 ...
 
 ## Structure
-Main implementation is R-package.... That file provides helpers to build input tables and objectives, run robustness analyses (regret and quantile-performance) and visualize results (2D/3D Pareto front) as well as robustness frontier exploration.
+Main implementation is an R package. This package provides helpers to build input tables and objectives, run robustness analyses (regret-based and satisficing-based), and visualize results (2D/3D Pareto fronts) as well as robustness frontier exploration.
 
 ![structure](figures/structure.svg)
 
 ## Input file
-The input file (.csv-file)... forest simulation model output ... values of e.g., ecosystem services...  needs to be ... containing the columns...
-Column file example:
-| management | sow | time | values_objective1 | values_objective2 | ... |
-|------------|-----|------|-------------------|-------------------|-----|
+The input file (.csv) should contain output from a forest simulation model, with values for ecosystem services or other objectives. The file must contain columns for management, state-of-the-world (SOW), time, and one or more objectives.
+
+Example column structure:
+| management | sow | time | objective1 | objective2 | ... |
+|------------|-----|------|------------|------------|-----|
 
 ## Functions
 
@@ -51,124 +54,126 @@ Transforms a given input file (`data.frame`) into the required FoRDM input forma
 - `time`: name of the time column in the input data.
 
 **Output**
-- A list containing:  
-  - `data`: the original `data.frame`,  
-  - `mapping`: a list with `management`, `sow`, and `time` column names,  
-  - `objectives`: a character vector of objective column names.
+- A list containing the formatted table for analysis.
 
 ---
 
-### **build_objectives()**
-Creates an objectives `data.frame` to define the names, optimization directions, weights, time-aggregation methods, and discount rates for each objective to be included in the FoRDM analysis.
+### **build_objectives_regret()**
+Creates an objectives `data.frame` for regret-based analysis, defining names, optimization directions, weights, time aggregation methods, and discount rates for each objective.
 
 **Inputs**
-- `obj_names`: character vector of objective column names.  
-- `obj_dirs`: character vector specifying "maximize" or "minimize" for each objective (default: "maximize").  
-- `obj_weights`: numeric vector of relative weights (must sum to 1).  
-- `obj_timeagg`: character vector specifying time aggregation methods ("mean", "sum", "max","min"). Discounting is only applied to "mean" and "sum".  
-- `obj_dr`: numeric vector representing discount rates for each objective (e.g., 0.02 indicates a 2% rate) applied during time aggregation.
+- `names`: character vector of objective column names.  
+- `direction`: character vector specifying "maximize" or "minimize" for each objective.  
+- `weights`: numeric vector of relative weights (must sum to 1).  
+- `time_aggregation`: character vector specifying time aggregation methods ("mean", "sum", "max", "min").  
+- `discount_rate`: numeric vector representing discount rates for each objective (e.g., 0.02 for 2%).
 
 **Output**
-- A `data.frame` with columns: `obj_names`, `obj_dirs`, `obj_weights`, `obj_timeagg`, `obj_dr`.
+- A `data.frame` with columns: `names`, `direction`, `weights`, `time_aggregation`, `discount_rate`.
+
+---
+
+### **build_objectives_satisficing()**
+Creates an objectives `data.frame` for satisficing-based analysis, defining names, time aggregation, discount rates, thresholds, and directions for each objective.
+
+**Inputs**
+- `names`: character vector of objective column names.  
+- `time_aggregation`: character vector specifying time aggregation methods.  
+- `discount_rate`: numeric vector representing discount rates.  
+- `treshold`: numeric vector of thresholds for each objective.  
+- `direction`: character vector specifying "above" or "below" for each objective.
+
+**Output**
+- A `data.frame` with columns: `names`, `time_aggregation`, `discount_rate`, `treshold`, `direction`.
 
 ---
 
 ### **fordm_analysis_regret()**
-Conducts a regret-based (Regret Type 2) Many-Objective robustness analysis. Aggregates objectives across time (with discounting), computes regrets for each SOW and management and selects robust representative SOWs. Produces Pareto fronts (real and normalized) and identifies the optimal robust management.
+Conducts a regret-based robustness analysis. Aggregates objectives across time (with discounting), computes regrets for each SOW and management, and selects robust representative SOWs. Produces Pareto fronts and identifies the optimal robust management.
 
 **Inputs**
 - `fordm_table`: output from `build_fordm_table()`.  
-- `objectives`: output from `build_objectives()`.  
-- `robustness`: numeric value (0-1) specifying the robustness level (e.g., 0.95 indicates a robustness level of 95%).  
-- `sow_selection`: "representative" (default) or "mean" — determines how robustness across SOWs are calculated per management. "representative": Selects the SOW closest to the user-defined quantile as a representative. "mean": Uses the mean across all SOWs below the quantile.
+- `objectives`: output from `build_objectives_regret()`.  
+- `robustness`: numeric value (0-1) specifying the robustness level.  
+- `method`: method for regret calculation (e.g., "CVaR").
 
 **Output**
-- A list containing:  
-  - `optimal`: row for the optimal management (renamed column "management"),  
-  - `pareto_front_real`: `data.frame` of the Pareto front with real objective values,  
-  - `pareto_front_normalized`: `data.frame` of the Pareto front with normalized objective values.
+- A list containing the optimal management and Pareto front.
 
 ---
 
-### **fordm_analysis_qperform()**
-Performs a quantile-performance robustness analysis. Aggregates objectives across time (with discounting), calculates per-management quantile values for each objective, normalizes them, and computes weighted scores to identify the optimal management. Returns Pareto fronts in both real (quantile-based) and normalized forms.
+### **fordm_analysis_satisficing()**
+Performs a satisficing-based robustness analysis. Aggregates objectives, applies thresholds, and computes scores to identify the optimal management. Returns Pareto fronts.
 
 **Inputs**
 - `fordm_table`: output from `build_fordm_table()`.  
-- `objectives`: output from `build_objectives()`.  
-- `robustness`: numeric value (0-1) specifying the robustness level (e.g., 0.95 indicates a robustness level of 95%). Can be also a vector of robustness level for each objective individually.
+- `objectives`: output from `build_objectives_satisficing()`.  
+- `robustness`: numeric value (0-1) specifying the robustness level.
 
 **Output**
-- A list containing:  
-  - `optimal`: the optimal management strategy at the specified robustness level, including real objective values,
-  - `pareto_front_real`: the Pareto front of management strategies with real objective values at the specified robustness level,
-  - `pareto_front_normalized`: the Pareto front of management strategies with normalized objective values at the specified robustness level.
+- A list containing the optimal management and Pareto front.
 
 ---
 
 ### **visualize_fordm_2d()**
-Generates a 2D scatter plot of the Pareto front for two selected objectives using `ggplot2`. Supports plotting real or normalized values.
+Generates a 2D scatter plot of the Pareto front for two selected objectives using `ggplot2`. Supports regret and satisficing methods.
 
 **Inputs**
-- `analysis_output`: result from `fordm_analysis_regret()` or `fordm_analysis_qperform()`.  
-- `x`: name of the objective for the x-axis (string).  
-- `y`: name of the objective for the y-axis (string).  
-- `values`: "real" (default) or "normalized".
+- `analysis_output`: result from `fordm_analysis_regret()` or `fordm_analysis_satisficing()`.  
+- `x`: name of the objective for the x-axis.  
+- `y`: name of the objective for the y-axis.  
+- `fordm_method`: "regret" or "satisficing".
 
 **Output**
-- A `ggplot2` plot, visualizing the 2D Pareto front with management labels.
+- A `ggplot2` plot visualizing the 2D Pareto front with management labels.
 
-**Example plot:**
-
-![2D plot example](figures/2dplot.png)
 ---
 
 ### **visualize_fordm_3d()**
-Creates an interactive 3D Pareto front plot using `plotly` for three selected objectives. Supports plotting real or normalized values.
+Creates an interactive 3D Pareto front plot using `plotly` for three selected objectives. Supports regret and satisficing methods.
 
 **Inputs**
-- `analysis_output`: result from `fordm_analysis_regret()` or `fordm_analysis_qperform()`.  
-- `x`, `y`, `z`: names of the objectives for the three axes (strings).  
-- `values`: "real" (default) or "normalized".
+- `analysis_output`: result from `fordm_analysis_regret()` or `fordm_analysis_satisficing()`.  
+- `x`, `y`, `z`: names of the objectives for the three axes.  
+- `fordm_method`: "regret" or "satisficing".
 
 **Output**
-- An `plotly` plot (interactive 3D scatter plot) visualizing the Pareto front.
+- A `plotly` plot (interactive 3D scatter plot) visualizing the Pareto front.
 
-**Example plot:**
-
-![3D plot example](figures/3dplot.png)
 ---
 
-### **robustness_frontier_explorer()**
-Analyzes the robustness frontier across a range of robustness (quantile) levels. Supports both regret-based and quantile-performance methods. Tracks the best management at each robustness level, computes marginal benefits and losses when management changes, and returns a table of frontier results.
+### **robustness_frontier_regret()**
+Analyzes the robustness frontier across a range of robustness levels for regret-based analysis. Tracks the best management at each level and returns a table of frontier results.
 
 **Inputs**
 - `fordm_table`: output from `build_fordm_table()`.  
-- `objectives`: output from `build_objectives()`.  
-- `robustness_range`: Range in robustness level for which the frontier exploration is applied (e.g., c(0.5,1.0) means 50% - 100%).
-- `sow_selection`: "representative" or "mean".  
-- `method`: "regret" (default) or "qperform".
+- `objectives`: output from `build_objectives_regret()`.  
 
 **Output**
-- A `data.frame` with one row per robustness level (for the selected best management), including:  
-  - `management`, `robustness_level`,  
-  - objective columns (real or quantile-based as appropriate),  
-  - marginal benefit and marginal loss columns for each objective (e.g., `<obj>_benefit` and `<obj>_loss`). Marginal benefit: The improvement in each objective when switching to the new best management after relaxing robustness. Marginal loss: The potential loss in each objective if reduced robustness leads to a riskier outcome—showing what you could lose by leaving the previous best management.
+- A `data.frame` with one row per robustness level and selected management.
+
+---
+
+### **robustness_frontier_satisficing()**
+Analyzes the robustness frontier across a range of robustness levels for satisficing-based analysis. Tracks the best management at each level and returns a table of frontier results.
+
+**Inputs**
+- `fordm_table`: output from `build_fordm_table()`.  
+- `objectives`: output from `build_objectives_satisficing()`.  
+
+**Output**
+- A `data.frame` with one row per robustness level and selected management.
 
 ---
 
 ### **visualize_rfe()**
-Visualizes the output of the robustness frontier explorer. Plots objective trajectories across robustness levels, annotates management labels, and highlights marginal benefits (→) and losses (←) when management changes.
+Visualizes the output of the robustness frontier explorer. Plots objective trajectories across robustness levels, annotates management labels, and highlights marginal benefits and losses when management changes.
 
 **Inputs**
-- `rfe_output`: `data.frame` returned by `robustness_frontier_explorer()`.
+- `output_RFE`: `data.frame` returned by `robustness_frontier_regret()` or `robustness_frontier_satisficing()`.
 
 **Output**
 - A `ggplot2` plot visualizing the robustness frontier with annotations for benefits and losses.
-
-**Example plot:**
-
-![rfe plot example](figures/rfeplot.png)
 
 ---
 ## Example
@@ -181,39 +186,54 @@ library(FoRDM)
 df <- read.csv("YOUR_DATA.csv")
 
 # Build FoRDM table (columns in your data must match)
-FoRDM_table <- build_fordm_table(df, management = "management", sow = "scenario", time = "year")
+fordm_table <- build_fordm_table(df, management = "management", sow = "scenario", time = "year")
 
-# Define objectives
-objectives <- build_objectives(
-  obj_names   = c("standing_biomass", "biodiversity", "harvest_revenue"), #identical with the column names in your input data
-  obj_dirs    = c("maximize", "maximize", "maximize"),
-  obj_weights = c(0.2, 0.2, 0.6),
-  obj_timeagg = c("mean", "mean", "sum"),
-  obj_dr      = c(0, 0, 0.02)
-)
+# Regret-based objectives
+objectives_regret <- build_objectives_regret(
+  names = c("standing_biomass", "biodiversity", "harvest_revenue"),
+  direction = c("maximize", "maximize", "maximize"),
+  weights = c(0.2, 0.2, 0.6),
+  time_aggregation = c("mean", "mean", "sum"),
+  discount_rate = c(0, 0, 0.02))
 
-# Run regret-based FoRDM analysis (quantile performance analysis follows the same procedure)
-output_regret <- fordm_analysis_regret(FoRDM_table, objectives, quantile = 0.9, sow_selection = "mean")
+# Regret-based analysis
+output_fordm_regret <- fordm_analysis_regret(
+  fordm_table = fordm_table,
+  objectives = objectives_regret,
+  robustness = 0.95,
+  method = "CVaR")
+output_fordm_regret$optimal
+output_fordm_regret$pareto_front
+# Visualize
+visualize_fordm_2d(output_fordm_regret, x = "biodiversity", y = "harvest_revenue", fordm_method = "regret")
+visualize_fordm_3d(output_fordm_regret, x = "biodiversity", y = "standing_biomass", z = "harvest_revenue", fordm_method = "regret")
 
-# Inspect optimal robust management
-print(output_regret$optimal)
-# Inspect pareto front
-print(output_regret$pareto_front_real) #real values
-print(output_regret$pareto_front_normalized) #normalized values
+# Satisficing-based objectives
+objectives_satisficing <- build_objectives_satisficing(
+  names = c("standing_biomass", "biodiversity", "harvest_revenue"),
+  time_aggregation = c("mean", "mean", "sum"),
+  discount_rate = c(0, 0, 0.02),
+  treshold = c(100, 45, 6000),
+  direction = c("above", "above", "above"))
 
-# Visualize FoRDM analysis output
-visualize_fordm_2d(output_fordm_regret,x="biodiversity",y="harvest_revenue",values = "real")
-visualize_fordm_3d(output_fordm_regret,x="biodiversity",y="standing_biomass",z="harvest_revenue",values = "real")
+# Satisficing-based analysis
+output_fordm_satisficing <- fordm_analysis_satisficing(
+  fordm_table = fordm_table,
+  objectives = objectives_satisficing,
+  robustness = 0.7)
+output_fordm_satisficing$optimal
+output_fordm_satisficing$pareto_front
+# Visualize
+visualize_fordm_2d(output_fordm_satisficing, x = "biodiversity", y = "harvest_revenue", fordm_method = "satisficing")
+visualize_fordm_3d(output_fordm_satisficing, x = "biodiversity", y = "standing_biomass", z = "harvest_revenue", fordm_method = "satisficing")
 
-# Robustness frontier exploration
-output_rfe <- robustness_frontier_explorer(fordm_table = FoRDM_table,
-                                           objectives = objectives,
-                                           quantile_range = c(0.5,1.0),
-                                           sow_selection = "mean",
-                                           method = "regret")
-
-# Visualize robustness frontier exploration analysis
-visualize_rfe(output_rfe)
+# Robustness Frontier Exploration
+output_rfr <- robustness_frontier_regret(fordm_table = fordm_table, objectives = objectives_regret)
+output_rfs <- robustness_frontier_satisficing(fordm_table = fordm_table, objectives = objectives_satisficing)
+# Plot
+visualize_rfe(output_rfr)
+visualize_rfe(output_rfs)
+```
 
 ```
 
