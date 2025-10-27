@@ -211,9 +211,7 @@ output_rta <- robustness_tradeoff_analysis(fordm_table = fordm_table,
 output_rta$summary
 output_rta$plot
 ```
-
-```
-
+---
 ## Citation
 Djahangard & Yousefpour 2025
 
