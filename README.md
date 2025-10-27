@@ -142,39 +142,17 @@ Creates an interactive 3D Pareto front plot using `plotly` for three selected ob
 
 ---
 
-### **robustness_frontier_regret()**
-Analyzes the robustness frontier across a range of robustness levels for regret-based analysis. Tracks the best management at each level and returns a table of frontier results.
+### **robustness_tradeoff_analysis()**
+Explores trade-offs when relaxing robustness for better perfomance in regret-based FoRDM analysis. Sweeps robustness levels (0-100%), selects the optimal management at each level, tracks switches in optimal manageemnt, and summarizes marginal benefits/losses per objective.
 
 **Inputs**
 - `fordm_table`: output from `build_fordm_table()`.  
 - `objectives`: output from `build_objectives_regret()`.  
 
 **Output**
-- A `data.frame` with one row per robustness level and selected management.
-
----
-
-### **robustness_frontier_satisficing()**
-Analyzes the robustness frontier across a range of robustness levels for satisficing-based analysis. Tracks the best management at each level and returns a table of frontier results.
-
-**Inputs**
-- `fordm_table`: output from `build_fordm_table()`.  
-- `objectives`: output from `build_objectives_satisficing()`.  
-
-**Output**
-- A `data.frame` with one row per robustness level and selected management.
-
----
-
-### **visualize_rfe()**
-Visualizes the output of the robustness frontier explorer. Plots objective trajectories across robustness levels, annotates management labels, and highlights marginal benefits and losses when management changes.
-
-**Inputs**
-- `output_RFE`: `data.frame` returned by `robustness_frontier_regret()` or `robustness_frontier_satisficing()`.
-
-**Output**
-- A `ggplot2` plot visualizing the robustness frontier with annotations for benefits and losses.
-
+- A `list` with:
+   - `summary`: list of data.frames. First entry gives the initial optimal management and its robustness range; subsequent entries correspond to switches and include `robustness_range`, `optimal_management`, and per-objective benefit/loss stats (`<prev_mgmt>_<objective>_benefit_min/mean/max`, `<prev_mgmt>_<objective>_loss_min/mean/max`).
+   - `plot`: a ggplot2 scatter showing objective values for optimal managements across robustness levels.
 ---
 ## Example
 
