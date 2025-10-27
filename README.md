@@ -178,7 +178,7 @@ objectives_regret <- build_objectives_regret(
 output_fordm_regret <- fordm_analysis_regret(
   fordm_table = fordm_table,
   objectives = objectives_regret,
-  robustness = 0.95,
+  robustness = 0.9,
   method = "CVaR")
 output_fordm_regret$optimal
 output_fordm_regret$pareto_front
@@ -198,7 +198,7 @@ objectives_satisficing <- build_objectives_satisficing(
 output_fordm_satisficing <- fordm_analysis_satisficing(
   fordm_table = fordm_table,
   objectives = objectives_satisficing,
-  robustness = 0.7)
+  robustness = 0.8)
 output_fordm_satisficing$optimal
 output_fordm_satisficing$pareto_front
 # Visualize
@@ -206,11 +206,10 @@ visualize_fordm_2d(output_fordm_satisficing, x = "biodiversity", y = "harvest_re
 visualize_fordm_3d(output_fordm_satisficing, x = "biodiversity", y = "standing_biomass", z = "harvest_revenue", fordm_method = "satisficing")
 
 # Robustness Frontier Exploration
-output_rfr <- robustness_frontier_regret(fordm_table = fordm_table, objectives = objectives_regret)
-output_rfs <- robustness_frontier_satisficing(fordm_table = fordm_table, objectives = objectives_satisficing)
-# Plot
-visualize_rfe(output_rfr)
-visualize_rfe(output_rfs)
+output_rta <- robustness_tradeoff_analysis(fordm_table = fordm_table,
+                                           objectives = objectives_regret)
+output_rta$summary
+output_rta$plot
 ```
 
 ```
