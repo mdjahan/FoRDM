@@ -216,8 +216,10 @@ output_rta$plot
 Djahangard & Yousefpour 2025
 
 ## Funding
-This work was funded by the EU HORIZON project "eco2adapt"...  
-We also thank the EU ... project "DecisionES" for support...
+This work was funded by the EU HORIZON project "eco2adapt".  
+
+## Acknowledgment
+We thank the HORIZON project "DecisionES".
 
 ## References
 ...
