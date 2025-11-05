@@ -217,10 +217,10 @@ output_rta$plot
 Djahangard & Yousefpour 2025
 
 ## Funding
-This work was funded by the EU HORIZON project "eco2adapt".  
+This work was funded by the EU HORIZON project "eco2adapt" (grant number 101059498).
 
 ## Acknowledgment
-We thank the HORIZON project "DecisionES".
+...
 
 ## References
 ...
