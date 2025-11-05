@@ -218,7 +218,7 @@ Djahangard & Yousefpour 2025
 
 ## Funding
 This work was funded by the EU HORIZON project "eco2adapt" (grant number 101059498).
-
+![e2a_log](figures/e2aLogoEU.png)
 ## Acknowledgment
 ...
 
