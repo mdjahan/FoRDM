@@ -127,6 +127,7 @@ Generates a 2D scatter plot of the Pareto front for two selected objectives usin
 **Output**
 - A `ggplot2` plot visualizing the 2D Pareto front with management labels.
 
+(figures/pareto_3d_satisficing.png)
 ---
 
 ### **visualize_fordm_3d()**
