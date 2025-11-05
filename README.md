@@ -126,8 +126,7 @@ Generates a 2D scatter plot of the Pareto front for two selected objectives usin
 
 **Output**
 - A `ggplot2` plot visualizing the 2D Pareto front with management labels.
-
-(figures/pareto_3d_satisficing.png)
+![Pareto 2D regret plot](figures/2dplot_regret.png)
 ---
 
 ### **visualize_fordm_3d()**
@@ -140,7 +139,7 @@ Creates an interactive 3D Pareto front plot using `plotly` for three selected ob
 
 **Output**
 - A `plotly` plot (interactive 3D scatter plot) visualizing the Pareto front.
-
+![Pareto 3D satisficing plot](figures/pareto_3d_satisficing.png)
 ---
 
 ### **robustness_tradeoff_analysis()**
@@ -154,6 +153,7 @@ Explores trade-offs when relaxing robustness for better perfomance in regret-bas
 - A `list` with:
    - `summary`: list of data.frames. First entry gives the initial optimal management and its robustness range; subsequent entries correspond to switches and include `robustness_range`, `optimal_management`, and per-objective benefit/loss stats (`<prev_mgmt>_<objective>_benefit_min/mean/max`, `<prev_mgmt>_<objective>_loss_min/mean/max`).
    - `plot`: a ggplot2 scatter showing objective values for optimal managements across robustness levels.
+![RTA plot](figures/rta_plot.png)
 ---
 ## Example
 
