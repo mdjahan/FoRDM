@@ -220,7 +220,7 @@ visualize_fordm_3d(output_fordm_satisficing, x = "biodiversity", y = "standing_b
 visualize_parcoord(output_fordm_satisficing, fordm_method = "satisficing")
 visualize_parcoord_management(fordm_table, objectives_satisficing, fordm_method = "satisficing",management="M32")
 
-# Robustness Frontier Exploration
+# Robustness Trade-off Analysis
 output_rta <- robustness_tradeoff_analysis(fordm_table = fordm_table,
                                            objectives = objectives_regret)
 output_rta$summary
