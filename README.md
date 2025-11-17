@@ -131,17 +131,17 @@ Creates an interactive 3D Pareto front plot using `plotly` for three selected ob
 ![Pareto 3D satisficing plot](figures/pareto_3d_satisficing.png)
 ---
 ### **visualize_fordm_parcoord()**
-Creates an interactive parallel coordinates plot of the Pareto front across all objectives using `plotly`. For regret-based analysis, shows objective values with uniform coloring. For satisficing-based analysis, includes robustness as an additional dimension with gradient color coding.
+Creates an parallel coordinates plot of the Pareto front across all objectives using `plotly`. For regret-based analysis, shows objective values with uniform coloring. For satisficing-based analysis, includes robustness as an additional dimension with gradient color coding.
 
 **Inputs**
 - `analysis_output`: result from `fordm_analysis_regret()` or `fordm_analysis_satisficing()`.  
 - `fordm_method`: "regret" or "satisficing".
 
 **Output**
-- A `plotly` parallel coordinates plot visualizing the Pareto front across all objectives. In satisficing mode, lines are colored by robustness percentage (70-100%).
+- A `plotly` parallel coordinates plot visualizing the Pareto front across all objectives. In satisficing mode, lines are colored by robustness percentage.
 ---
 ### **visualize_fordm_parcoord_management()**
-Creates an interactive parallel coordinates plot showing SOW (State-of-the-World) performance across objectives for a selected management strategy using `plotly`. For regret-based analysis, lines are colored by robustness percentile (0-100%). For satisficing-based analysis, lines are colored binary (red = not satisfied, green = all thresholds satisfied).
+Creates an parallel coordinates plot showing SOW (State-of-the-World) performance across objectives for a selected management strategy using `plotly`. For regret-based analysis, lines are colored by robustness percentile (0-100%). For satisficing-based analysis, lines are colored binary (red = not satisfied, green = all thresholds satisfied).
 
 **Inputs**
 - `fordm_table`: output from `build_fordm_table()`.  
@@ -151,9 +151,6 @@ Creates an interactive parallel coordinates plot showing SOW (State-of-the-World
 
 **Output**
 - A `plotly` parallel coordinates plot showing how the selected management performs across different SOWs, with each line representing one SOW scenario.
-
-![Parallel coordinates management plot](figures/parcoord_management_regret.png)
-
 ---
 ### **robustness_tradeoff_analysis()**
 Explores trade-offs when relaxing robustness for better perfomance in regret-based FoRDM analysis. Sweeps robustness levels (0-100%), selects the optimal management at each level, tracks switches in optimal manageemnt, and summarizes marginal benefits/losses per objective.
