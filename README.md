@@ -196,6 +196,8 @@ output_fordm_regret$pareto_front
 # Visualize
 visualize_fordm_2d(output_fordm_regret, x = "biodiversity", y = "harvest_revenue", fordm_method = "regret")
 visualize_fordm_3d(output_fordm_regret, x = "biodiversity", y = "standing_biomass", z = "harvest_revenue", fordm_method = "regret")
+visualize_parcoord(output_fordm_regret, fordm_method = "regret")
+visualize_parcoord_management(fordm_table, objectives_regret, fordm_method = "regret",management="M31")
 
 # Satisficing-based objectives
 objectives_satisficing <- build_objectives_satisficing(
@@ -215,6 +217,8 @@ output_fordm_satisficing$pareto_front
 # Visualize
 visualize_fordm_2d(output_fordm_satisficing, x = "biodiversity", y = "harvest_revenue", fordm_method = "satisficing")
 visualize_fordm_3d(output_fordm_satisficing, x = "biodiversity", y = "standing_biomass", z = "harvest_revenue", fordm_method = "satisficing")
+visualize_parcoord(output_fordm_satisficing, fordm_method = "satisficing")
+visualize_parcoord_management(fordm_table, objectives_satisficing, fordm_method = "satisficing",management="M32")
 
 # Robustness Frontier Exploration
 output_rta <- robustness_tradeoff_analysis(fordm_table = fordm_table,
