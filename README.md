@@ -16,9 +16,9 @@
    - [fordm_analysis_satisficing](#fordm_analysis_satisficing)
    - [visualize_fordm_2d](#visualize_fordm_2d)
    - [visualize_fordm_3d](#visualize_fordm_3d)
-   - [robustness_frontier_regret](#robustness_frontier_regret)
-   - [robustness_frontier_satisficing](#robustness_frontier_satisficing)
-   - [visualize_rfe](#visualize_rfe)
+   - [visualize_fordm_parcoord](#visualize_fordm_parcoord)
+   - [visualize_fordm_parcoord_management](#visualize_fordm_parcoord)
+   - [robustness_tradeoff_analysis](#robustness_tradeoff_analysis)
 5. [Example](#example)  
 6. [Citation](#citation)  
 7. [Funding](#funding)  
@@ -55,9 +55,7 @@ Transforms a given input file (`data.frame`) into the required FoRDM input forma
 
 **Output**
 - A list containing the formatted table for analysis.
-
 ---
-
 ### **build_objectives_regret()**
 Creates an objectives `data.frame` for regret-based analysis, defining names, optimization directions, weights, time aggregation methods, and discount rates for each objective.
 
@@ -70,9 +68,7 @@ Creates an objectives `data.frame` for regret-based analysis, defining names, op
 
 **Output**
 - A `data.frame` with columns: `names`, `direction`, `weights`, `time_aggregation`, `discount_rate`.
-
 ---
-
 ### **build_objectives_satisficing()**
 Creates an objectives `data.frame` for satisficing-based analysis, defining names, time aggregation, discount rates, thresholds, and directions for each objective.
 
@@ -85,9 +81,7 @@ Creates an objectives `data.frame` for satisficing-based analysis, defining name
 
 **Output**
 - A `data.frame` with columns: `names`, `time_aggregation`, `discount_rate`, `treshold`, `direction`.
-
 ---
-
 ### **fordm_analysis_regret()**
 Conducts a regret-based robustness analysis. Aggregates objectives across time (with discounting), computes regrets for each SOW and management, and selects robust representative SOWs. Produces Pareto fronts and identifies the optimal robust management.
 
@@ -99,9 +93,7 @@ Conducts a regret-based robustness analysis. Aggregates objectives across time (
 
 **Output**
 - A list containing the optimal management and Pareto front.
-
 ---
-
 ### **fordm_analysis_satisficing()**
 Performs a satisficing-based robustness analysis. Aggregates objectives, applies thresholds, and computes scores to identify the optimal management. Returns Pareto fronts.
 
@@ -112,9 +104,7 @@ Performs a satisficing-based robustness analysis. Aggregates objectives, applies
 
 **Output**
 - A list containing the optimal management and Pareto front.
-
 ---
-
 ### **visualize_fordm_2d()**
 Generates a 2D scatter plot of the Pareto front for two selected objectives using `ggplot2`. Supports regret and satisficing methods.
 
@@ -128,7 +118,6 @@ Generates a 2D scatter plot of the Pareto front for two selected objectives usin
 - A `ggplot2` plot visualizing the 2D Pareto front with management labels.
 ![Pareto 2D regret plot](figures/2dplot_regret.png)
 ---
-
 ### **visualize_fordm_3d()**
 Creates an interactive 3D Pareto front plot using `plotly` for three selected objectives. Supports regret and satisficing methods.
 
@@ -141,7 +130,31 @@ Creates an interactive 3D Pareto front plot using `plotly` for three selected ob
 - A `plotly` plot (interactive 3D scatter plot) visualizing the Pareto front.
 ![Pareto 3D satisficing plot](figures/pareto_3d_satisficing.png)
 ---
+### **visualize_fordm_parcoord()**
+Creates an interactive parallel coordinates plot of the Pareto front across all objectives using `plotly`. For regret-based analysis, shows objective values with uniform coloring. For satisficing-based analysis, includes robustness as an additional dimension with gradient color coding.
 
+**Inputs**
+- `analysis_output`: result from `fordm_analysis_regret()` or `fordm_analysis_satisficing()`.  
+- `fordm_method`: "regret" or "satisficing".
+
+**Output**
+- A `plotly` parallel coordinates plot visualizing the Pareto front across all objectives. In satisficing mode, lines are colored by robustness percentage (70-100%).
+---
+### **visualize_fordm_parcoord_management()**
+Creates an interactive parallel coordinates plot showing SOW (State-of-the-World) performance across objectives for a selected management strategy using `plotly`. For regret-based analysis, lines are colored by robustness percentile (0-100%). For satisficing-based analysis, lines are colored binary (red = not satisfied, green = all thresholds satisfied).
+
+**Inputs**
+- `fordm_table`: output from `build_fordm_table()`.  
+- `objectives`: output from `build_objectives_regret()` or `build_objectives_satisficing()`.  
+- `fordm_method`: "regret" or "satisficing".  
+- `management`: character string specifying which management strategy to visualize.
+
+**Output**
+- A `plotly` parallel coordinates plot showing how the selected management performs across different SOWs, with each line representing one SOW scenario.
+
+![Parallel coordinates management plot](figures/parcoord_management_regret.png)
+
+---
 ### **robustness_tradeoff_analysis()**
 Explores trade-offs when relaxing robustness for better perfomance in regret-based FoRDM analysis. Sweeps robustness levels (0-100%), selects the optimal management at each level, tracks switches in optimal manageemnt, and summarizes marginal benefits/losses per objective.
 
