@@ -95,7 +95,7 @@ Conducts a regret-based robustness analysis. Aggregates objectives across time (
 - A list containing the optimal management and Pareto front.
 ---
 ### **fordm_analysis_satisficing()**
-Performs a satisficing-based robustness analysis. Aggregates objectives, applies thresholds, and computes scores to identify the optimal management. Returns Pareto fronts.
+Performs a satisficing-based robustness analysis. Aggregates objectives and applies thresholds to find satisficing alternatives. Optimal robust management and Pareto fron are computed via optimization on Euclidean distance. Returns optimal robust management and Pareto front.
 
 **Inputs**
 - `fordm_table`: output from `build_fordm_table()`.  
