@@ -54,8 +54,10 @@ Transforms a given input file (`data.frame`) into the required FoRDM input forma
 - `time`: name of the time column in the input data.
 
 **Output**
-- A list containing the formatted table for analysis.
+- A list containing the formatted table for analysis, including the input data, mapping for identification of columns, and objective columns.
+
 ---
+
 ### **build_objectives_regret()**
 Creates an objectives `data.frame` for regret-based analysis, defining names, optimization directions, weights, time aggregation methods, and discount rates for each objective.
 
@@ -68,43 +70,56 @@ Creates an objectives `data.frame` for regret-based analysis, defining names, op
 
 **Output**
 - A `data.frame` with columns: `names`, `direction`, `weights`, `time_aggregation`, `discount_rate`.
+
 ---
+
 ### **build_objectives_satisficing()**
 Creates an objectives `data.frame` for satisficing-based analysis, defining names, time aggregation, discount rates, thresholds, and directions for each objective.
 
 **Inputs**
 - `names`: character vector of objective column names.  
-- `time_aggregation`: character vector specifying time aggregation methods.  
-- `discount_rate`: numeric vector representing discount rates.  
-- `treshold`: numeric vector of thresholds for each objective.  
+- `time_aggregation`: character vector specifying time aggregation methods ("mean", "sum", "max", "min").  
+- `discount_rate`: numeric vector representing discount rates (e.g., 0.02 for 2%).  
+- `threshold`: numeric vector of thresholds for each objective.  
 - `direction`: character vector specifying "above" or "below" for each objective.
 
 **Output**
-- A `data.frame` with columns: `names`, `time_aggregation`, `discount_rate`, `treshold`, `direction`.
+- A `data.frame` with columns: `names`, `time_aggregation`, `discount_rate`, `threshold`, `direction`.
+
 ---
+
 ### **fordm_analysis_regret()**
 Conducts a regret-based robustness analysis. Aggregates objectives across time (with discounting), computes regrets for each SOW and management, and selects robust representative SOWs. Produces Pareto fronts and identifies the optimal robust management.
 
 **Inputs**
 - `fordm_table`: output from `build_fordm_table()`.  
 - `objectives`: output from `build_objectives_regret()`.  
-- `robustness`: numeric value (0-1) specifying the robustness level.  
-- `method`: method for regret calculation (e.g., "CVaR").
+- `robustness`: numeric value (0-1) specifying the robustness level (e.g., 0.9 for 90%).  
 
 **Output**
-- A list containing the optimal management and Pareto front.
+- A list containing:
+  - `optimal`: The management strategy identified as most robust.
+  - `pareto_front`: The Pareto front of robust management strategies.
+  - `method`: The method used.
+  - `robustness`: The robustness level used.
+
 ---
+
 ### **fordm_analysis_satisficing()**
-Performs a satisficing-based robustness analysis. Aggregates objectives and applies thresholds to find satisficing alternatives. Optimal robust management and Pareto fron are computed via optimization on Euclidean distance. Returns optimal robust management and Pareto front.
+Performs a satisficing-based robustness analysis. Aggregates objectives and applies thresholds to find satisficing alternatives. Optimal robust management and Pareto front are computed via optimization on Euclidean distance. Returns optimal robust management and Pareto front.
 
 **Inputs**
 - `fordm_table`: output from `build_fordm_table()`.  
 - `objectives`: output from `build_objectives_satisficing()`.  
-- `robustness`: numeric value (0-1) specifying the robustness level.
+- `robustness`: numeric value (0-1) specifying the robustness level (e.g., 0.9 for 90%).
 
 **Output**
-- A list containing the optimal management and Pareto front.
+- A list containing:
+  - `optimal`: The management strategy that balances all objectives while meeting the robustness threshold.
+  - `pareto_front`: The Pareto front of robust management strategies.
+
 ---
+
 ### **visualize_fordm_2d()**
 Generates a 2D scatter plot of the Pareto front for two selected objectives using `ggplot2`. Supports regret and satisficing methods.
 
@@ -116,8 +131,11 @@ Generates a 2D scatter plot of the Pareto front for two selected objectives usin
 
 **Output**
 - A `ggplot2` plot visualizing the 2D Pareto front with management labels.
+
 ![Pareto 2D regret plot](figures/2dplot_regret.png)
+
 ---
+
 ### **visualize_fordm_3d()**
 Creates an interactive 3D Pareto front plot using `plotly` for three selected objectives. Supports regret and satisficing methods.
 
@@ -128,10 +146,13 @@ Creates an interactive 3D Pareto front plot using `plotly` for three selected ob
 
 **Output**
 - A `plotly` plot (interactive 3D scatter plot) visualizing the Pareto front.
+
 ![Pareto 3D satisficing plot](figures/pareto_3d_satisficing.png)
+
 ---
+
 ### **visualize_fordm_parcoord()**
-Creates an parallel coordinates plot of the Pareto front across all objectives using `plotly`. For regret-based analysis, shows objective values with uniform coloring. For satisficing-based analysis, includes robustness as an additional dimension with gradient color coding.
+Creates a parallel coordinates plot of the Pareto front across all objectives using `plotly`. For regret-based analysis, shows objective values with uniform coloring. For satisficing-based analysis, includes robustness as an additional dimension with gradient color coding.
 
 **Inputs**
 - `analysis_output`: result from `fordm_analysis_regret()` or `fordm_analysis_satisficing()`.  
@@ -139,9 +160,11 @@ Creates an parallel coordinates plot of the Pareto front across all objectives u
 
 **Output**
 - A `plotly` parallel coordinates plot visualizing the Pareto front across all objectives. In satisficing mode, lines are colored by robustness percentage.
+
 ---
+
 ### **visualize_fordm_parcoord_management()**
-Creates an parallel coordinates plot showing SOW (State-of-the-World) performance across objectives for a selected management strategy using `plotly`. For regret-based analysis, lines are colored by robustness percentile (0-100%). For satisficing-based analysis, lines are colored binary (red = not satisfied, green = all thresholds satisfied).
+Creates a parallel coordinates plot showing SOW (State-of-the-World) performance across objectives for a selected management strategy using `plotly`. For regret-based analysis, lines are colored by robustness percentile (0-100%). For satisficing-based analysis, lines are colored binary (red = not satisfied, green = all thresholds satisfied).
 
 **Inputs**
 - `fordm_table`: output from `build_fordm_table()`.  
@@ -151,9 +174,11 @@ Creates an parallel coordinates plot showing SOW (State-of-the-World) performanc
 
 **Output**
 - A `plotly` parallel coordinates plot showing how the selected management performs across different SOWs, with each line representing one SOW scenario.
+
 ---
+
 ### **robustness_tradeoff_analysis()**
-Explores trade-offs when relaxing robustness for better perfomance in regret-based FoRDM analysis. Sweeps robustness levels (0-100%), selects the optimal management at each level, tracks switches in optimal manageemnt, and summarizes marginal benefits/losses per objective.
+Explores trade-offs when relaxing robustness for better performance in regret-based FoRDM analysis. Sweeps robustness levels (0-100%), selects the optimal management at each level, tracks switches in optimal management, and summarizes marginal benefits/losses per objective.
 
 **Inputs**
 - `fordm_table`: output from `build_fordm_table()`.  
@@ -161,8 +186,9 @@ Explores trade-offs when relaxing robustness for better perfomance in regret-bas
 
 **Output**
 - A `list` with:
-   - `summary`: list of data.frames. First entry gives the initial optimal management and its robustness range; subsequent entries correspond to switches and include `robustness_range`, `optimal_management`, and per-objective benefit/loss stats (`<prev_mgmt>_<objective>_benefit_min/mean/max`, `<prev_mgmt>_<objective>_loss_min/mean/max`).
-   - `plot`: a ggplot2 scatter showing objective values for optimal managements across robustness levels.
+  - `summary`: list of data.frames. First entry gives the initial optimal management and its robustness range; subsequent entries correspond to switches and include `robustness_range`, `optimal_management`, and per-objective benefit/loss stats (`<prev_mgmt>_<objective>_benefit_min/mean/max`, `<prev_mgmt>_<objective>_loss_min/mean/max`).
+  - `plot`: a ggplot2 scatter plot showing objective values for optimal managements across robustness levels (0-100%).
+
 ![RTA plot](figures/rta_plot.png)
 ---
 ## Example
