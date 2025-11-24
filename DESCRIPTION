@@ -1,7 +1,7 @@
 Package: FoRDM
 Type: Package
 Title: Forest related multi-objective Robust Decision Making (FoRDM)
-Version: 0.1.0
+Version: 1.0.0
 Authors@R: c(person(given = "Marc", family = "Djahangard", email = "marc.djahangard@ife.uni-freiburg.de", role = c("aut", "cre")), person(given = "Rasoul", family = "Yousefpour", role = c("aut")))
 Maintainer: Marc Djahangard <marc.djahangard@ife.uni-freiburg.de>
 Description: This package provides a toolkit for Forest research related many-objective Robust Decision Making (FoRDM)

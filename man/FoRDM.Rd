@@ -15,8 +15,8 @@ trade-off analysis to support decision making in forest ecosystems under deep un
 Main features:
 \itemize{
 \item Build FoRDM input tables from simulation outputs.
-\item Compute robustness measures: Regret Type II and Satisficing Type I.
-\item Visualize output in 2D-, 3D- or parallel-coordinate plots.
+\item Compute robustness measures: Regret nd Satisficing.
+\item Visualize output in 2D-, 3D- or Parallel Coordinate plots.
 \item Perform robustness trade-off analysis.
 }
 }
