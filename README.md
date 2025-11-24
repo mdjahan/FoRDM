@@ -266,15 +266,26 @@ The authors thank the EU Horizon 2020 project "DecisionES" (Decision Support for
 
 ## References
 Armstrong McKay, D. I., Staal, A., Abrams, J. F., Winkelmann, R., Sakschewski, B., Loriani, S., Fetzer, I., Cornell, S. E., Rockström, J., and Lenton, T. M.: Exceeding 1.5°C global warming could trigger multiple climate tipping points, Science, 377, eabn7950, https://doi.org/10.1126/science.abn7950, 2022.
+
 Forzieri, G., Girardello, M., Ceccherini, G., Spinoni, J., Feyen, L., Hartmann, H., Beck, P. S. A., Camps-Valls, G., Chirici, G., Mauri, A., and Cescatti, A.: Emergent vulnerability to climate-driven disturbances in European forests, Nat Commun, 12, 1081, https://doi.org/10.1038/s41467-021-21399-7, 2021.
+
 Hadka, D., Herman, J., Reed, P., and Keller, K.: An open source framework for many-objective robust decision making, Environmental Modelling & Software, 74, 114–129, https://doi.org/10.1016/j.envsoft.2015.07.014, 2015.
+
 Hartmann, H., Bastos, A., Das, A. J., Esquivel-Muelbert, A., Hammond, W. M., Martínez-Vilalta, J., McDowell, N. G., Powers, J. S., Pugh, T. A. M., Ruthrof, K. X., and Allen, C. D.: Climate Change Risks to Global Forest Health: Emergence of Unexpected Events of Elevated Tree Mortality Worldwide, Annual Review of Plant Biology, 73, 673–702, https://doi.org/10.1146/annurev-arplant-102820-012804, 2022a.
+
 Hartmann, H., Bastos, A., Das, A. J., Esquivel-Muelbert, A., Hammond, W. M., Martínez-Vilalta, J., McDowell, N. G., Powers, J. S., Pugh, T. A. M., Ruthrof, K. X., and Allen, C. D.: Climate Change Risks to Global Forest Health: Emergence of Unexpected Events of Elevated Tree Mortality Worldwide, Annual Review of Plant Biology, 73, 673–702, https://doi.org/10.1146/annurev-arplant-102820-012804, 2022b.
+
 Kasprzyk, J. R., Nataraj, S., Reed, P. M., and Lempert, R. J.: Many objective robust decision making for complex environmental systems undergoing change, Environmental Modelling & Software, 42, 55–71, https://doi.org/10.1016/j.envsoft.2012.12.007, 2013.
 Keenan, R. J.: Climate change impacts and adaptation in forest management: a review, Annals of Forest Science, 72, 145–167, https://doi.org/10.1007/s13595-014-0446-5, 2015.
+
 Lempert, R. J., Popper, S. W., and Bankes, S. C.: Shaping the Next One Hundred Years: New Methods for Quantitative, Long-Term Policy Analysis, RAND Corporation, Erscheinungsort nicht ermittelbar, 1 pp., 2003.
+
 McDowell, N. G., Allen, C. D., Anderson-Teixeira, K., Aukema, B. H., Bond-Lamberty, B., Chini, L., Clark, J. S., Dietze, M., Grossiord, C., Hanbury-Brown, A., Hurtt, G. C., Jackson, R. B., Johnson, D. J., Kueppers, L., Lichstein, J. W., Ogle, K., Poulter, B., Pugh, T. A. M., Seidl, R., Turner, M. G., Uriarte, M., Walker, A. P., and Xu, C.: Pervasive shifts in forest dynamics in a changing world, Science, 368, eaaz9463, https://doi.org/10.1126/science.aaz9463, 2020.
+
 Patacca, M., Lindner, M., Lucas-Borja, M. E., Cordonnier, T., Fidej, G., Gardiner, B., Hauf, Y., Jasinevičius, G., Labonne, S., Linkevičius, E., Mahnken, M., Milanovic, S., Nabuurs, G.-J., Nagel, T. A., Nikinmaa, L., Panyatov, M., Bercak, R., Seidl, R., Ostrogović Sever, M. Z., Socha, J., Thom, D., Vuletic, D., Zudin, S., and Schelhaas, M.-J.: Significant increase in natural disturbance impacts on European forests since 1950, Global Change Biology, 29, 1359–1376, https://doi.org/10.1111/gcb.16531, 2023.
+
 Radke, N., Yousefpour, R., von Detten, R., Reifenberg, S., and Hanewinkel, M.: Adopting robust decision-making to forest management under climate change, Annals of Forest Science, 74, 43, https://doi.org/10.1007/s13595-017-0641-2, 2017.
+
 Seidl, R., Thom, D., Kautz, M., Martin-Benito, D., Peltoniemi, M., Vacchiano, G., Wild, J., Ascoli, D., Petr, M., Honkaniemi, J., Lexer, M. J., Trotsiuk, V., Mairota, P., Svoboda, M., Fabrika, M., Nagel, T. A., and Reyer, C. P. O.: Forest disturbances under climate change, Nature Clim Change, 7, 395–402, https://doi.org/10.1038/nclimate3303, 2017.
+
 Yousefpour, R. and Hanewinkel, M.: Climate Change and Decision-Making Under Uncertainty, Curr Forestry Rep, 2, 143–149, https://doi.org/10.1007/s40725-016-0035-y, 2016.
