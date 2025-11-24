@@ -269,8 +269,9 @@ Djahangard, M. and Yousefpour, R.: FoRDM - Forest Many-Objective Robust Decision
 
 ## Funding
 This work was funded by the HORIZON EUROPE's project "eco2adapt" (Ecosystem-based Adaptation and Changemaking to Shape, Protect, and Sustain the Resilience of Tomorrow's Forests, Grant no: 101059498).
-![e2a_log](figures/e2aLogoEU.png)
-![uni_logo](figures/uni_logo.png)
+
+\figure{e2aLogoEU.png}{options: width=50\%}
+\figure{uni_logo.png}{options: width=50\%}
 
 ## Acknowledgment
 The authors thank the EU Horizon 2020 project "DecisionES" (Decision Support for the Supply of Ecosystem Services under Global Change, Grant no: 101007950) for supporting this work.
