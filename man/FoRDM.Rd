@@ -5,19 +5,20 @@
 \name{FoRDM}
 \alias{FoRDM-package}
 \alias{FoRDM}
-\title{Forest related multi-objective Robust Decision Making (FoRDM)}
+\title{Forest Many-Objective Robust Decision Making (FoRDM)}
 \description{
-This package provides a toolkit for Forest research related many-objective Robust Decision Making (FoRDM)
-analysis under uncertainty. It includes robustness measure calculation of regret-based (Type II and cVaR) and satisficing-based as well as robustness
-trade-off analysis to support decision making in forest ecosystems under deep uncertainty.
+This package provides a toolkit for supporting robust forest management under deep uncertainty.
+It provides a forestry-focused application of Many-Objective Robust Decision Making (MORDM) to forest simulation outputs,
+enabling users to evaluate robustness using regret- and satisficing-based measures. FoRDM identifies robust solutions,
+generates Pareto fronts, and offers interactive 2D, 3D, and parallel-coordinate visualizations.
 }
 \details{
 Main features:
 \itemize{
-\item Build FoRDM input tables from simulation outputs.
-\item Compute robustness measures: Regret nd Satisficing.
-\item Visualize output in 2D-, 3D- or Parallel Coordinate plots.
-\item Perform robustness trade-off analysis.
+\item Create FoRDM input tables from forest simulation outputs.
+\item Calculate robustness measures based on Regret and Satisficing approaches.
+\item Visualize results using 2D, 3D, or parallel-coordinate plots.
+\item Explore trade-offs between robustness and performance.
 }
 }
 \seealso{

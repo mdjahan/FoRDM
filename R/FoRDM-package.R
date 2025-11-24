@@ -1,4 +1,4 @@
-#' Forest multi-objective Robust Decision Making (FoRDM)
+#' Forest Many-Objective Robust Decision Making (FoRDM)
 #'
 #' @description
 #' This package provides a toolkit for supporting robust forest management under deep uncertainty.
@@ -22,5 +22,4 @@
 #' @author Rasoul Yousefpour (author)
 #'
 #' @seealso browseVignettes(package = "FoRDM")
-
 "_PACKAGE"
