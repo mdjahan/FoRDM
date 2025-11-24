@@ -36,7 +36,7 @@ Main implementation is an R package. This package provides helpers to build inpu
 ![structure](figures/structure.svg)
 
 ## Input file
-The input file (.csv) should contain output from a forest simulation model, with values for ecosystem services or other objectives. The file must contain columns for management, state-of-the-world (SOW), time, and one or more objectives.
+The input file (.csv) should contain pre-processed outputs from a forest simulation model. These data need to be structured so that each row represents a combination of management alternative, state of the world (SOW), time step, and one or more objective values. States of the world can reflect any sources of uncertainty specified by the user—such as climate projections, socioeconomic pathways, or model parameter variability—while management alternatives represent the different strategies evaluated in the simulation. Objective columns capture performance indicators of interest, for example ecosystem services, economic returns, or other measures used to compare strategies. The user is responsible for preparing these inputs in advance, including defining the set of management options, specifying uncertainties, and calculating the objective outcomes that will be used for the robustness analysis.
 
 Example column structure:
 | management | sow | time | objective1 | objective2 | ... |
