@@ -2,7 +2,7 @@
 
 <img src="figures/logo.png" alt="FoRDM logo" width="250" style="display: block; margin: 30px auto 0 auto;">
 
-**Fo**rest related Many-Objective **R**obust **D**ecision **M**aking (**FoRDM**) is an R-based toolkit for supporting robust forest management under deep uncertainty. Forests are increasingly threatened by climate-driven disturbances and mortality, making it critical to identify management strategies that sustain key ecosystem services under uncertain futures. Evaluating such strategies is challenging due to multiple, often conflicting objectives and deep uncertainty over ecological and socioeconomic conditions. **FoRDM** addresses this challenge by evaluating alternative management strategies across multiple objectives and plausible futures. The package identifies robust solutions using regret-based and satisficing-based analysis, supports flexible objective weighting and time aggregation, and provides interactive visualizations of management trade-offs. The current release is available as an R package and as a simplified, easy-to-use web application.
+**Fo**rest related Many-Objective **R**obust **D**ecision **M**aking (**FoRDM**) is an R-based toolkit for supporting robust forest management under deep uncertainty. Forests are increasingly threatened by climate change driven disturbances and mortality, making it critical to identify management strategies that sustain key ecosystem services under uncertain futures. Evaluating such strategies is challenging due to multiple, often conflicting objectives and deep uncertainty over ecological and socioeconomic conditions. **FoRDM** addresses this challenge by evaluating alternative management strategies across multiple objectives and plausible futures. The package identifies robust solutions using regret-based and satisficing-based analysis, supports flexible objective weighting and time aggregation, and provides interactive visualizations of management trade-offs. The current release is available as an R package and as a simplified, easy-to-use web application.
 
 ##
 1. [Introduction](#introduction)  
@@ -31,7 +31,7 @@ Ecosystems, especially forests, are increasingly threatened by climate change, m
 ...
 
 ## Structure
-Main implementation is an R package. This package provides helpers to build input tables and objectives, run robustness analyses (regret-based and satisficing-based), and visualize results (2D/3D Pareto fronts) as well as robustness frontier exploration.
+Main implementation is an R package. This package provides helpers to build input tables and objectives, run robustness analyses (regret-based and satisficing-based), and visualize results (2D, 3D & Parallel Coordinate Pareto fronts) as well as a robustness trade-off analysis.
 
 ![structure](figures/structure.svg)
 
@@ -254,14 +254,14 @@ output_rta$plot
 ```
 ---
 ## Citation
-Djahangard & Yousefpour 2025
+Djahangard & Yousefpour, 2025
 
 ## Funding
-This work was funded by the EU HORIZON project "eco2adapt" (grant number 101059498).
+This work was funded by the HORIZON EUROPE's project "eco2adapt" (Ecosystem-based Adaptation and Changemaking to Shape, Protect, and Sustain the Resilience of Tomorrow's Forests, Grant no: 101059498).
 ![e2a_log](figures/e2aLogoEU.png)
+
 ## Acknowledgment
-...
+The authors thank the EU Horizon 2020 project "DecisionES" (Decision Support for the Supply of Ecosystem Services under Global Change, Grant no: 101007950) for supporting this work.
 
 ## References
-...
-...existing code...
+
