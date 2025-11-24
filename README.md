@@ -166,6 +166,7 @@ Creates a parallel coordinates plot of the Pareto front across all objectives us
 
 Example plots for regret (right) and satisficing (left):
 ![Parcoord plot](figures/parcoord.png)
+
 ---
 
 ### **visualize_fordm_parcoord_management()**
@@ -182,6 +183,7 @@ Creates a parallel coordinates plot showing SOW (State-of-the-World) performance
 
 Example plots for regret (right) and satisficing (left):
 ![Parcoord plot](figures/parcoord_management.png)
+
 ---
 
 ### **robustness_tradeoff_analysis()**
@@ -196,7 +198,9 @@ Explores trade-offs when relaxing robustness for better performance in regret-ba
   - `summary`: list of data.frames. First entry gives the initial optimal management and its robustness range; subsequent entries correspond to switches and include `robustness_range`, `optimal_management`, and per-objective benefit/loss stats (`<prev_mgmt>_<objective>_benefit_min/mean/max`, `<prev_mgmt>_<objective>_loss_min/mean/max`).
   - `plot`: a ggplot2 scatter plot showing objective values for optimal managements across robustness levels (0-100%).
 
+Example plot:
 ![RTA plot](figures/rta_plot.png)
+
 ---
 ## Example
 
