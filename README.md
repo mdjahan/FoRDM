@@ -1,6 +1,6 @@
 # FoRDM
 
-<img src="figures/logo.png" alt="FoRDM logo" width="250" style="display: block; margin: 30px auto 0 auto;">
+<img src="figures/fordm_logo.png" alt="FoRDM logo" width="250" style="display: block; margin: 30px auto 0 auto;">
 
 **Fo**rest Many-Objective **R**obust **D**ecision **M**aking (**FoRDM**) is an R-based toolkit for supporting robust forest management under deep uncertainty. **FoRDM** provides a forestry-focused, user-friendly applciation of MORDM to forest simulation outputs. It supports regret- and satisficing-based robustness, objective weighting, time aggregation, and robustness preferences. **FoRDM** identifies robust solutions, generates Pareto fronts, and offers interactive 2D, 3D, and parallel-coordinate visualizations. An analytical module highlights trade-offs between robustness and performance.
 
@@ -133,7 +133,8 @@ Generates a 2D scatter plot of the Pareto front for two selected objectives usin
 **Output**
 - A `ggplot2` plot visualizing the 2D Pareto front with management labels.
 
-![Pareto 2D regret plot](figures/2dplot_regret.png)
+Example plots for regret (right) and satisficing (left):
+![Pareto 2D plot](figures/2d_plot.png)
 
 ---
 
@@ -148,7 +149,8 @@ Creates an interactive 3D Pareto front plot using `plotly` for three selected ob
 **Output**
 - A `plotly` plot (interactive 3D scatter plot) visualizing the Pareto front.
 
-![Pareto 3D satisficing plot](figures/pareto_3d_satisficing.png)
+Example plots for regret (right) and satisficing (left):
+![Pareto 3D plot](figures/3d_plot.png)
 
 ---
 
@@ -162,6 +164,8 @@ Creates a parallel coordinates plot of the Pareto front across all objectives us
 **Output**
 - A `plotly` parallel coordinates plot visualizing the Pareto front across all objectives. In satisficing mode, lines are colored by robustness percentage.
 
+Example plots for regret (right) and satisficing (left):
+![Parcoord plot](figures/parcoord.png)
 ---
 
 ### **visualize_fordm_parcoord_management()**
@@ -176,6 +180,8 @@ Creates a parallel coordinates plot showing SOW (State-of-the-World) performance
 **Output**
 - A `plotly` parallel coordinates plot showing how the selected management performs across different SOWs, with each line representing one SOW scenario.
 
+Example plots for regret (right) and satisficing (left):
+![Parcoord plot](figures/parcoord_management.png)
 ---
 
 ### **robustness_tradeoff_analysis()**
@@ -260,6 +266,7 @@ Djahangard, M. and Yousefpour, R.: FoRDM - Forest Many-Objective Robust Decision
 ## Funding
 This work was funded by the HORIZON EUROPE's project "eco2adapt" (Ecosystem-based Adaptation and Changemaking to Shape, Protect, and Sustain the Resilience of Tomorrow's Forests, Grant no: 101059498).
 ![e2a_log](figures/e2aLogoEU.png)
+![uni_logo](figures/uni_logo.png)
 
 ## Acknowledgment
 The authors thank the EU Horizon 2020 project "DecisionES" (Decision Support for the Supply of Ecosystem Services under Global Change, Grant no: 101007950) for supporting this work.
