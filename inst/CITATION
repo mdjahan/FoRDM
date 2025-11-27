@@ -9,6 +9,7 @@ bibentry(
   ),
   year    = "2025",
   note    = sprintf("R package version %s", utils::packageVersion("FoRDM")),
+  doi = "10.5281/zenodo.17738074",
   url  = "https://github.com/mdjahan/FoRDM"
 )
 
