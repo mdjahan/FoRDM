@@ -1,3 +1,5 @@
+[![DOI](https://sandbox.zenodo.org/badge/1072227643.svg)](https://handle.test.datacite.org/10.5072/zenodo.409367)
+
 # FoRDM
 
 <img src="figures/fordm_logo.png" alt="FoRDM logo" width="250" style="display: block; margin: 30px auto 0 auto;">
