@@ -1,0 +1,15 @@
+citHeader("To cite FoRDM in publications, please use:")
+
+bibentry(
+  bibtype = "Manual",
+  title   = "FoRDM: Forest Many-Objective Robust Decision Making toolkit",
+  author  = c(
+    person(given = "Marc", family = "Djahangard", role = c("aut","cre")),
+    person(given = "Rasoul", family = "Yousefpour", role = "aut")
+  ),
+  year    = "2025",
+  note    = sprintf("R package version %s", utils::packageVersion("FoRDM")),
+  url  = "https://github.com/mdjahan/FoRDM"
+)
+
+citFooter("Also cite R itself: see citation() in R.")
