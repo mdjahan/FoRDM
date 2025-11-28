@@ -1,5 +1,3 @@
-[![DOI](https://zenodo.org/badge/1072227643.svg)](https://doi.org/10.5281/zenodo.17738073)
-
 # FoRDM
 
 <img src="figures/fordm_logo.png" alt="FoRDM logo" width="250" style="display: block; margin: 30px auto 0 auto;">
