@@ -247,7 +247,7 @@ objectives_satisficing <- build_objectives_satisficing(
   names = c("standing_biomass", "biodiversity", "harvest_revenue"),
   time_aggregation = c("mean", "mean", "sum"),
   discount_rate = c(0, 0, 0.02),
-  treshold = c(100, 45, 6000),
+  threshold = c(100, 45, 6000),
   direction = c("above", "above", "above"))
 
 # Satisficing-based analysis
