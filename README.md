@@ -215,60 +215,8 @@ Example plot:
 # Load package
 library(FoRDM)
 
-# Load your data (replace with your path)
-df <- read.csv("YOUR_DATA.csv")
+# Load the test data
 
-# Build FoRDM table (columns in your data must match)
-fordm_table <- build_fordm_table(df, management = "management", sow = "scenario", time = "year")
-
-# Regret-based objectives
-objectives_regret <- build_objectives_regret(
-  names = c("standing_biomass", "biodiversity", "harvest_revenue"),
-  direction = c("maximize", "maximize", "maximize"),
-  weights = c(0.2, 0.2, 0.6),
-  time_aggregation = c("mean", "mean", "sum"),
-  discount_rate = c(0, 0, 0.02))
-
-# Regret-based analysis
-output_fordm_regret <- fordm_analysis_regret(
-  fordm_table = fordm_table,
-  objectives = objectives_regret,
-  robustness = 0.9,
-  method = "CVaR")
-output_fordm_regret$optimal
-output_fordm_regret$pareto_front
-# Visualize
-visualize_fordm_2d(output_fordm_regret, x = "biodiversity", y = "harvest_revenue", fordm_method = "regret")
-visualize_fordm_3d(output_fordm_regret, x = "biodiversity", y = "standing_biomass", z = "harvest_revenue", fordm_method = "regret")
-visualize_parcoord(output_fordm_regret, fordm_method = "regret")
-visualize_parcoord_management(fordm_table, objectives_regret, fordm_method = "regret",management="M31")
-
-# Satisficing-based objectives
-objectives_satisficing <- build_objectives_satisficing(
-  names = c("standing_biomass", "biodiversity", "harvest_revenue"),
-  time_aggregation = c("mean", "mean", "sum"),
-  discount_rate = c(0, 0, 0.02),
-  threshold = c(100, 45, 6000),
-  direction = c("above", "above", "above"))
-
-# Satisficing-based analysis
-output_fordm_satisficing <- fordm_analysis_satisficing(
-  fordm_table = fordm_table,
-  objectives = objectives_satisficing,
-  robustness = 0.8)
-output_fordm_satisficing$optimal
-output_fordm_satisficing$pareto_front
-# Visualize
-visualize_fordm_2d(output_fordm_satisficing, x = "biodiversity", y = "harvest_revenue", fordm_method = "satisficing")
-visualize_fordm_3d(output_fordm_satisficing, x = "biodiversity", y = "standing_biomass", z = "harvest_revenue", fordm_method = "satisficing")
-visualize_parcoord(output_fordm_satisficing, fordm_method = "satisficing")
-visualize_parcoord_management(fordm_table, objectives_satisficing, fordm_method = "satisficing",management="M32")
-
-# Robustness Trade-off Analysis
-output_rta <- robustness_tradeoff_analysis(fordm_table = fordm_table,
-                                           objectives = objectives_regret)
-output_rta$summary
-output_rta$plot
 ```
 ---
 ## Citation
