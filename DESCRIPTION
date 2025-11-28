@@ -1,12 +1,12 @@
 Package: FoRDM
 Type: Package
-Title: Forest Many-Objective Robust Decision Making (FoRDM)
+Title: Forest Many-Objective Robust Decision Making ('FoRDM')
 Version: 1.0.0
 Authors@R: c(person(given = "Marc", family = "Djahangard", email = "marc.djahangard@ife.uni-freiburg.de", role = c("aut", "cre")), person(given = "Rasoul", family = "Yousefpour", role = c("aut")))
 Maintainer: Marc Djahangard <marc.djahangard@ife.uni-freiburg.de>
-Description: Forest Many-Objective Robust Decision Making (FoRDM) is a R toolkit for supporting robust forest management under deep uncertainty.
-    It provides a forestry-focused application of Many-Objective Robust Decision Making (MORDM) to forest simulation outputs, 
-    enabling users to evaluate robustness using regret- and satisficing-based measures. FoRDM identifies robust solutions, 
+Description: Forest Many-Objective Robust Decision Making ('FoRDM') is a R toolkit for supporting robust forest management under deep uncertainty.
+    It provides a forestry-focused application of Many-Objective Robust Decision Making ('MORDM') to forest simulation outputs, 
+    enabling users to evaluate robustness using regret- and 'satisficing'-based measures. 'FoRDM' identifies robust solutions, 
     generates Pareto fronts, and offers interactive 2D, 3D, and parallel-coordinate visualizations.
 License: MIT + file LICENSE
 Encoding: UTF-8
