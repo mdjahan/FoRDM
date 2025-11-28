@@ -1,3 +1,5 @@
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.17749153.svg)](https://doi.org/10.5281/zenodo.17749153)
+
 # FoRDM
 
 **Fo**rest Many-Objective **R**obust **D**ecision **M**aking (**FoRDM**) is an R-based toolkit for supporting robust forest management under deep uncertainty. **FoRDM** provides a forestry-focused, user-friendly application of MORDM to forest simulation outputs. It supports regret- and satisficing-based robustness, objective weighting, time aggregation, and robustness preferences. **FoRDM** identifies robust solutions, generates Pareto fronts, and offers interactive 2D, 3D, and parallel-coordinate visualizations. An analytical module highlights trade-offs between robustness and performance.
@@ -286,5 +288,6 @@ Patacca, M., Lindner, M., Lucas-Borja, M. E., Cordonnier, T., Fidej, G., Gardine
 Radke, N., Yousefpour, R., von Detten, R., Reifenberg, S., and Hanewinkel, M.: Adopting robust decision-making to forest management under climate change, Annals of Forest Science, 74, 43, https://doi.org/10.1007/s13595-017-0641-2, 2017.
 
 Seidl, R., Thom, D., Kautz, M., Martin-Benito, D., Peltoniemi, M., Vacchiano, G., Wild, J., Ascoli, D., Petr, M., Honkaniemi, J., Lexer, M. J., Trotsiuk, V., Mairota, P., Svoboda, M., Fabrika, M., Nagel, T. A., and Reyer, C. P. O.: Forest disturbances under climate change, Nature Clim Change, 7, 395–402, https://doi.org/10.1038/nclimate3303, 2017.
+
 
 Yousefpour, R. and Hanewinkel, M.: Climate Change and Decision-Making Under Uncertainty, Curr Forestry Rep, 2, 143–149, https://doi.org/10.1007/s40725-016-0035-y, 2016.
