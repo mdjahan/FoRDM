@@ -2,15 +2,15 @@ citHeader("To cite FoRDM in publications, please use:")
 
 bibentry(
   bibtype = "Manual",
-  title   = "FoRDM: Forest Many-Objective Robust Decision Making toolkit",
+  title   = "FoRDM: Forest Many-Objective Robust Decision Making Toolkit",
   author  = c(
-    person(given = "Marc", family = "Djahangard", role = c("aut","cre")),
-    person(given = "Rasoul", family = "Yousefpour", role = "aut")
+    person(given = "M.", family = "Djahangard", role = c("aut","cre")),
+    person(given = "R.", family = "Yousefpour", role = "aut")
   ),
   year    = "2025",
   note    = sprintf("R package version %s", utils::packageVersion("FoRDM")),
-  doi = "10.5281/zenodo.17738074",
-  url  = "https://github.com/mdjahan/FoRDM"
+  doi     = "10.5281/zenodo.17738074",
+  textVersion = "Djahangard, M. and Yousefpour, R. (2025). FoRDM: Forest Many-Objective Robust Decision Making Toolkit. R package version 1.0.0. doi:10.5281/zenodo.17738074"
 )
 
 citFooter("Also cite R itself: see citation() in R.")
