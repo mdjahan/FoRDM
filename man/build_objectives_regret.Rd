@@ -21,7 +21,7 @@ build_objectives_regret(
 
 \item{time_aggregation}{Time aggregation across objectives: 'mean', 'sum', 'min' or 'max'.}
 
-\item{discount_rate}{Discount rates for each objective (e.g., 0.02 means 2\% per time step), applied during time aggregation.}
+\item{discount_rate}{Annual discount rates for each objective (e.g., 0.02 means 2\% per year), applied during time aggregation.}
 }
 \value{
 A data frame specifying objectives, directions, weights, time aggregation methods, and discount rates for use in FoRDM analysis.

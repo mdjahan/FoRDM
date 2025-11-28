@@ -24,20 +24,30 @@ utils::globalVariables(c(
 #' @param management The name of the management column.
 #' @param sow The name of the state-of-the-worlds (SOW) column.
 #' @param time The name of the time column.
+#' @param time_unit The unit of time used in the time column. Options are "years" (default) or "decades". 
 #' 
 #' @return A list with the processed data for further use in the FoRDM analysis, including the input data, mapping for identification of columns and objective columns.
 #' 
 #' @export
-build_fordm_table <- function(data, management, sow, time) {
+build_fordm_table <- function(data, management, sow, time, time_unit = "years") {
   stopifnot(management %in% names(data))
   stopifnot(sow %in% names(data))
   stopifnot(time %in% names(data))
+  
   obj_cols <- setdiff(names(data), c(management, sow, time))
   if (length(obj_cols) == 0) stop("No objective columns found.")
+  
+  # Validate time_unit
+  valid_units <- c("years", "decades")
+  if (!time_unit %in% valid_units) {
+    stop(sprintf("time_unit must be one of: %s", paste(valid_units, collapse = ", ")))
+  }
+  
   list(
     data = data,
     mapping = list(management = management, sow = sow, time = time),
-    objectives = obj_cols
+    objectives = obj_cols,
+    time_unit = time_unit
   )
 }
 
@@ -49,7 +59,7 @@ build_fordm_table <- function(data, management, sow, time) {
 #' @param direction Direction of objective function: 'maximize' or 'minimize'.
 #' @param weights Relative weights (0-1) for each objective, must sum to 1.
 #' @param time_aggregation Time aggregation across objectives: 'mean', 'sum', 'min' or 'max'.
-#' @param discount_rate Discount rates for each objective (e.g., 0.02 means 2% per time step), applied during time aggregation.
+#' @param discount_rate Annual discount rates for each objective (e.g., 0.02 means 2% per year), applied during time aggregation.
 #' 
 #' @return A data frame specifying objectives, directions, weights, time aggregation methods, and discount rates for use in FoRDM analysis.
 #' 
@@ -85,18 +95,28 @@ build_objectives_regret <- function(names,
 }
 
 #Internal function for calculating time aggregation and discounting
-time_aggregation_fun <- function(x, t, timeagg, d) {
+time_aggregation_fun <- function(x, t, timeagg, d, time_unit = "years") {
+  #Time from start
+  time_start <- min(t, na.rm = TRUE)
+  time_from_start <- t - time_start
+  #Convert to years for discounting
+  if (time_unit == "decades") { #e.g., 1,2,3 -> 10,20,30
+    time_in_years <- time_from_start * 10
+  } else { #years
+    time_in_years <- time_from_start
+  }
+  
   if (timeagg == "sum") {
-    sum(x / (1 + d)^(t - 1), na.rm = TRUE)
+    sum(x / (1 + d)^time_in_years, na.rm = TRUE)
   } else if (timeagg == "mean") {
-    w <- 1 / (1 + d)^(t - 1)
+    w <- 1 / (1 + d)^time_in_years
     sum(x * w, na.rm = TRUE) / sum(w)
   } else if (timeagg == "max") {
     max(x, na.rm = TRUE)
   } else if (timeagg == "min") {
     min(x, na.rm = TRUE)
   } else {
-    stop("Unknown discount type")
+    stop("Unknown aggregation type")
   }
 }
 
@@ -135,7 +155,7 @@ fordm_analysis_regret <- function(fordm_table, objectives, robustness = 0.9, met
       ~ {
         timeagg <- objectives$time_aggregation[obj_col == dplyr::cur_column()]
         disc_rate <- objectives$discount_rate[obj_col == dplyr::cur_column()]
-        time_aggregation_fun(.x, data[[time_col]][dplyr::cur_group_rows()], timeagg, disc_rate)
+        time_aggregation_fun(.x, data[[time_col]][dplyr::cur_group_rows()], timeagg, disc_rate, fordm_table$time_unit)
       }
     ),
     .groups = "drop"
@@ -287,7 +307,7 @@ fordm_analysis_satisficing <- function(fordm_table, objectives, robustness = 0.9
       ~ {
         timeagg <- objectives$time_aggregation[obj_col == dplyr::cur_column()]
         disc_rate <- objectives$discount_rate[obj_col == dplyr::cur_column()]
-        time_aggregation_fun(.x, data[[time_col]][dplyr::cur_group_rows()], timeagg, disc_rate)
+        time_aggregation_fun(.x, data[[time_col]][dplyr::cur_group_rows()], timeagg, disc_rate, fordm_table$time_unit)
       }
     ),
     .groups = "drop"
@@ -764,7 +784,7 @@ visualize_fordm_parcoord_management <- function(fordm_table, objectives, fordm_m
       ~ {
         timeagg <- objectives$time_aggregation[obj_col == dplyr::cur_column()]
         disc_rate <- objectives$discount_rate[obj_col == dplyr::cur_column()]
-        time_aggregation_fun(.x, data_mgmt[[time_col]][dplyr::cur_group_rows()], timeagg, disc_rate)
+        time_aggregation_fun(.x, data_mgmt[[time_col]][dplyr::cur_group_rows()], timeagg, disc_rate, fordm_table$time_unit)
       }
     ),
     .groups = "drop"
@@ -780,7 +800,7 @@ visualize_fordm_parcoord_management <- function(fordm_table, objectives, fordm_m
         !!col := {
           timeagg <- objectives$time_aggregation[i]
           disc_rate <- objectives$discount_rate[i]
-          time_aggregation_fun(.data[[col]], data[[time_col]][dplyr::cur_group_rows()], timeagg, disc_rate)
+          time_aggregation_fun(.data[[col]], data[[time_col]][dplyr::cur_group_rows()], timeagg, disc_rate, fordm_table$time_unit)
         },
         .groups = "drop"
       )
@@ -982,7 +1002,7 @@ robustness_tradeoff_analysis <- function(fordm_table, objectives) {
       ~ {
         timeagg <- objectives$time_aggregation[obj_col == dplyr::cur_column()]
         disc_rate <- objectives$discount_rate[obj_col == dplyr::cur_column()]
-        time_aggregation_fun(.x, data[[time_col]][dplyr::cur_group_rows()], timeagg, disc_rate)
+        time_aggregation_fun(.x, data[[time_col]][dplyr::cur_group_rows()], timeagg, disc_rate, fordm_table$time_unit)
       }
     ),
     .groups = "drop"
