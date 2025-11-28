@@ -50,7 +50,7 @@ Example column structure:
 ## Functions
 
 ### **build_fordm_table()**
-Transforms a given input file (`data.frame`) into the required FoRDM input format. Identifies columns for management, SOW (state-of-world), and time, treating all other columns as objectives.
+Transforms a given input file (`data.frame`) into the required FoRDM input format. Identifies columns for management, SOW (state-of-world), and time, treating all other columns as objectives. Also needs definition of the time unit.
 
 **Inputs**
 - `data`: `data.frame` containing the input data.  
@@ -210,11 +210,64 @@ Example plot:
 ## Example
 
 ```r
-# Load package
 library(FoRDM)
 
-# Load the test data
+#Load your data
+df <- read.csv("YOUR_DATA.csv")
 
+#Define data frame structure for processing in FoRDM
+fordm_table <- build_fordm_table(df, management="management", sow="scenario", time="decade", time_unit = "years")
+
+#Regret based approach
+#Define objectives
+objectives_regret <- build_objectives_regret(
+      names = c("objective1","objective2","objective3"),
+      direction = c("maximize","maximize","maximize"),
+      weights = c(0.5,0.25,0.25),
+      time_aggregation = c("sum","mean","mean"),
+      discount_rate = c(0.02,0,0))
+#Run the regret robustness analysis
+output_fordm_regret <- fordm_analysis_regret(fordm_table = fordm_table,
+                                objectives = objectives_regret,
+                                robustness = 0.9)
+#output
+output_fordm_regret$optimal
+output_fordm_regret$pareto_front
+
+#visualize regret output
+visualize_fordm_2d(output_fordm_regret,x="objective1",y="objective2",fordm_method = "regret")
+visualize_fordm_3d(output_fordm_regret,x="objective1",y="objective2",z="objective3",fordm_method = "regret")
+visualize_fordm_parcoord(output_fordm_regret, fordm_method = "regret")
+visualize_fordm_parcoord_management(fordm_table, objectives_regret, fordm_method = "regret",management="M2")
+
+#Satisficing based approach
+#Define objectives
+objectives_satisficing <- build_objectives_satisficing(
+    names = c("objective1","objective2","objective3"),
+    time_aggregation = c("sum","mean","mean"),
+    discount_rate = c(0.02,0,0),
+    threshold = c(4000,40,40),
+    direction = c("above","above","above"))
+#Run the satisficing robustness analysis
+output_fordm_satisficing <- fordm_analysis_satisficing(fordm_table = fordm_table,
+                                             objectives = objectives_satisficing,
+                                             robustness = 0.8)
+#output
+output_fordm_satisficing$optimal
+output_fordm_satisficing$pareto_front
+
+#visualize satisficing output
+visualize_fordm_2d(output_fordm_satisficing,x="objective1",y="objective2",fordm_method = "satisficing")
+visualize_fordm_3d(output_fordm_satisficing,x="objective1",y="objective2",z="objective3",fordm_method = "satisficing")
+visualize_fordm_parcoord(output_fordm_satisficing, fordm_method = "satisficing")
+visualize_fordm_parcoord_management(fordm_table, objectives_satisficing, fordm_method = "satisficing",management="M2")
+
+#Robustness Trade-Off Analysis
+output_rta <- robustness_tradeoff_analysis(fordm_table = fordm_table,
+                                           objectives = objectives_regret)
+#output
+output_rta$summary
+output_rta$plot
 ```
 ---
 ## Citation
