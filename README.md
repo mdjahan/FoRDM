@@ -59,6 +59,7 @@ Transforms a given input file (`data.frame`) into the required FoRDM input forma
 - `management`: name of the management column in the input data.  
 - `sow`: name of the SOW (state-of-world) column in the input data.  
 - `time`: name of the time column in the input data.
+- `time_unit`: unit of time used in the time column. Options are "years" (default) or "decades". 
 
 **Output**
 - A list containing the formatted table for analysis, including the input data, mapping for identification of columns, and objective columns.
