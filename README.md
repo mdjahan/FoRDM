@@ -1,12 +1,8 @@
 # FoRDM
 
-<img src="figures/fordm_logo.png" alt="FoRDM logo" width="250" style="display: block; margin: 30px auto 0 auto;">
-
 **Fo**rest Many-Objective **R**obust **D**ecision **M**aking (**FoRDM**) is an R-based toolkit for supporting robust forest management under deep uncertainty. **FoRDM** provides a forestry-focused, user-friendly application of MORDM to forest simulation outputs. It supports regret- and satisficing-based robustness, objective weighting, time aggregation, and robustness preferences. **FoRDM** identifies robust solutions, generates Pareto fronts, and offers interactive 2D, 3D, and parallel-coordinate visualizations. An analytical module highlights trade-offs between robustness and performance.
 
-An easy-to-access, user-friendly Shiny web application of **FoRDM** is available [here](https://marcdjahangard.shinyapps.io/fordm_app/).
-
-##
+## Table of Contents
 1. [Introduction](#introduction)  
 2. [Structure](#structure)
 3. [Input file](#input-file)  
@@ -19,17 +15,18 @@ An easy-to-access, user-friendly Shiny web application of **FoRDM** is available
    - [visualize_fordm_2d](#visualize_fordm_2d)
    - [visualize_fordm_3d](#visualize_fordm_3d)
    - [visualize_fordm_parcoord](#visualize_fordm_parcoord)
-   - [visualize_fordm_parcoord_management](#visualize_fordm_parcoord)
+   - [visualize_fordm_parcoord_management](#visualize_fordm_parcoord_management)
    - [robustness_tradeoff_analysis](#robustness_tradeoff_analysis)
 5. [Example](#example)  
 6. [Citation](#citation)  
-7. [Funding](#funding)  
-8. [References](#references)
+7. [Funding](#funding)
+8. [Acknowledgment](#acknowledgment)
+9. [References](#references)
 
 ---
 
 ## Introduction
-Forests worldwide are increasingly affected by climate change (Hartmann et al., 2022; Forzieri et al., 2021; Patacca et al., 2023), with rising risks of mortality and natural disturbances posing major threats to ecosystem services (Hartmann et al., 2025; McDowell et al., 2020; Seidl et al., 2017). Therefore, it is essential to identify management strategies that safeguard key services. However, selecting effective strategies is challenging due to ecosystem complexity, the unprecented and rapid climate change (Armstrong McKay et al., 2022), and deep uncertainty in ecological and socioeconomic conditions (Keenan, 2015; Yousefpour & Hanewinkel, 2016).
+Forests worldwide are increasingly affected by climate change (Hartmann et al., 2022; Forzieri et al., 2021; Patacca et al., 2023), with rising risks of mortality and natural disturbances posing major threats to ecosystem services (Hartmann et al., 2025; McDowell et al., 2020; Seidl et al., 2017). Therefore, it is essential to identify management strategies that safeguard key services. However, selecting effective strategies is challenging due to ecosystem complexity, the unprecedented and rapid climate change (Armstrong McKay et al., 2022), and deep uncertainty in ecological and socioeconomic conditions (Keenan, 2015; Yousefpour & Hanewinkel, 2016).
 
 Decision support under such uncertainty requires tools that can explore plausible forest futures. Climate change represents deep uncertainty, where outcomes and probabilities are unknown, requiring evaluation across a broad range of plausible futures (Radke et al., 2017; Lempert et al., 2003). Robust Decision Making (RDM) addresses this challenge by identifying strategies that perform satisfactorily across many futures, focusing on downside risk rather than optimizing for a single scenario (Lempert et al., 2003; Kasprzyk et al., 2013; Radke et al., 2017). Robustness is commonly assessed using regret-based measures, which minimize how much worse an option performs compared to the best alternative, or satisficing-based measures, which evaluate whether minimum performance thresholds are met (Hadka et al., 2015; Radke et al., 2017). For complex, multi-objective forest management, RDM can be extended to Many-Objective RDM (MORDM), combining evolutionary optimization, Pareto-front generation, and interactive visualization (Kasprzyk et al., 2013). 
 
@@ -37,8 +34,6 @@ Yet, MORDM has seen limited adoption in forestry because existing tools are ofte
 
 ## Structure
 Main implementation is an R package. This package provides helpers to build input tables and objectives, run robustness analyses (regret-based and satisficing-based), and visualize results (2D, 3D & Parallel Coordinate Pareto fronts) as well as a robustness trade-off analysis.
-
-![structure](figures/structure.svg)
 
 ## Input file
 The input file (.csv) should contain pre-processed outputs from a forest simulation model. These data need to be structured so that each row represents a combination of management alternative, state of the world (SOW), time step, and one or more objective values. States of the world can reflect any sources of uncertainty specified by the user—such as climate projections, socioeconomic pathways, or model parameter variability—while management alternatives represent the different strategies evaluated in the simulation. Objective columns capture performance indicators of interest, for example ecosystem services, economic returns, or other measures used to compare strategies. The user is responsible for preparing these inputs in advance, including defining the set of management options, specifying uncertainties, and calculating the objective outcomes that will be used for the robustness analysis.
@@ -138,9 +133,6 @@ Generates a 2D scatter plot of the Pareto front for two selected objectives usin
 **Output**
 - A `ggplot2` plot visualizing the 2D Pareto front with management labels.
 
-Example plots for regret (right) and satisficing (left):
-![Pareto 2D plot](figures/2d_plot.png)
-
 ---
 
 ### **visualize_fordm_3d()**
@@ -154,9 +146,6 @@ Creates an interactive 3D Pareto front plot using `plotly` for three selected ob
 **Output**
 - A `plotly` plot (interactive 3D scatter plot) visualizing the Pareto front.
 
-Example plots for regret (right) and satisficing (left):
-![Pareto 3D plot](figures/3d_plot.png)
-
 ---
 
 ### **visualize_fordm_parcoord()**
@@ -168,9 +157,6 @@ Creates a parallel coordinates plot of the Pareto front across all objectives us
 
 **Output**
 - A `plotly` parallel coordinates plot visualizing the Pareto front across all objectives. In satisficing mode, lines are colored by robustness percentage.
-
-Example plots for regret (right) and satisficing (left):
-![Parcoord plot](figures/parcoord.png)
 
 ---
 
@@ -186,9 +172,6 @@ Creates a parallel coordinates plot showing SOW (State-of-the-World) performance
 **Output**
 - A `plotly` parallel coordinates plot showing how the selected management performs across different SOWs, with each line representing one SOW scenario.
 
-Example plots for regret (right) and satisficing (left):
-![Parcoord plot](figures/parcoord_management.png)
-
 ---
 
 ### **robustness_tradeoff_analysis()**
@@ -203,10 +186,8 @@ Explores trade-offs when relaxing robustness for better performance in regret-ba
   - `summary`: list of data.frames. First entry gives the initial optimal management and its robustness range; subsequent entries correspond to switches and include `robustness_range`, `optimal_management`, and per-objective benefit/loss stats (`<prev_mgmt>_<objective>_benefit_min/mean/max`, `<prev_mgmt>_<objective>_loss_min/mean/max`).
   - `plot`: a ggplot2 scatter plot showing objective values for optimal managements across robustness levels (0-100%).
 
-Example plot:
-![RTA plot](figures/rta_plot.png)
-
 ---
+
 ## Example
 
 ```r
@@ -269,15 +250,14 @@ output_rta <- robustness_tradeoff_analysis(fordm_table = fordm_table,
 output_rta$summary
 output_rta$plot
 ```
+
 ---
+
 ## Citation
-Djahangard, M. and Yousefpour, R.: FoRDM - Forest Many-Objective Robust Decision Making toolkit. 10.5281/zenodo.17738074. 2025
+Djahangard, M. and Yousefpour, R. (2025). FoRDM: Forest Many-Objective Robust Decision Making Toolkit. R package version 1.0.0. doi:10.5281/zenodo.17738074
 
 ## Funding
 This work was funded by the HORIZON EUROPE's project "eco2adapt" (Ecosystem-based Adaptation and Changemaking to Shape, Protect, and Sustain the Resilience of Tomorrow's Forests, Grant no: 101059498).
-
-<img src="figures/e2aLogoEU.png" width="250"/>
-<img src="figures/uni_logo.png" width="250"/>
 
 ## Acknowledgment
 The authors thank the EU Horizon 2020 project "DecisionES" (Decision Support for the Supply of Ecosystem Services under Global Change, Grant no: 101007950) for supporting this work.
@@ -294,6 +274,7 @@ Hartmann, H., Bastos, A., Das, A. J., Esquivel-Muelbert, A., Hammond, W. M., Mar
 Hartmann, H., Bastos, A., Das, A. J., Esquivel-Muelbert, A., Hammond, W. M., Martínez-Vilalta, J., McDowell, N. G., Powers, J. S., Pugh, T. A. M., Ruthrof, K. X., and Allen, C. D.: Climate Change Risks to Global Forest Health: Emergence of Unexpected Events of Elevated Tree Mortality Worldwide, Annual Review of Plant Biology, 73, 673–702, https://doi.org/10.1146/annurev-arplant-102820-012804, 2022b.
 
 Kasprzyk, J. R., Nataraj, S., Reed, P. M., and Lempert, R. J.: Many objective robust decision making for complex environmental systems undergoing change, Environmental Modelling & Software, 42, 55–71, https://doi.org/10.1016/j.envsoft.2012.12.007, 2013.
+
 Keenan, R. J.: Climate change impacts and adaptation in forest management: a review, Annals of Forest Science, 72, 145–167, https://doi.org/10.1007/s13595-014-0446-5, 2015.
 
 Lempert, R. J., Popper, S. W., and Bankes, S. C.: Shaping the Next One Hundred Years: New Methods for Quantitative, Long-Term Policy Analysis, RAND Corporation, Erscheinungsort nicht ermittelbar, 1 pp., 2003.

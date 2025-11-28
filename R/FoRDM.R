@@ -1,6 +1,6 @@
 #' @importFrom magrittr %>%
 #' @importFrom rlang .data sym :=
-#' @importFrom dplyr group_by ungroup bind_rows mutate summarise across all_of cur_column cur_group_rows rowwise c_across starts_with slice_min slice_max slice_max slice_min filter arrange left_join select rename slice_max slice_min reframe lag first cur_data
+#' @importFrom dplyr group_by ungroup bind_rows mutate summarise across all_of cur_column cur_group_rows rowwise c_across starts_with slice_min slice_max filter arrange left_join select rename reframe lag first pick everything
 #' @importFrom tibble as_tibble_row
 #' @importFrom ggplot2 ggplot aes geom_point geom_text geom_vline geom_line labs theme_bw facet_wrap scale_fill_gradientn scale_color_gradientn scale_x_reverse geom_blank theme element_text
 #' @importFrom tidyr pivot_longer
@@ -376,7 +376,7 @@ fordm_analysis_satisficing <- function(fordm_table, objectives, robustness = 0.9
       quantile_distance <- quantile(euclidean_distance, probs = robustness, na.rm = TRUE)
       #Find the SOW closest to this quantile value (representative for the robustness level)
       closest_idx <- which.min(abs(euclidean_distance - quantile_distance))
-      quantile_row <- dplyr::cur_data()[closest_idx, ]
+      quantile_row <- dplyr::pick(dplyr::everything())[closest_idx, ]
       
       result <- tibble::tibble(
         satisficing = satisficing_val,
@@ -1177,6 +1177,10 @@ robustness_tradeoff_analysis <- function(fordm_table, objectives) {
       summary_list[[si]] <- as.data.frame(summary_row)
     }
     summary_list <- c(list(initial_row), summary_list)
+  } else{
+    summary_list <- list(data.frame(
+      robustness_range = paste0("0-1"),
+      optimal_management = best_mgmt_tracker_unique))
   }
   
   #plot values across robustness levels
@@ -1185,7 +1189,7 @@ robustness_tradeoff_analysis <- function(fordm_table, objectives) {
   })
   all_results <- do.call(rbind, results_selected)
   #Only keep optimal management rows
-  optimal_managements <- sapply(summary_list, function(x) x$optimal_management)
+  optimal_managements <- best_mgmt_tracker_unique
   optimal_rows <- all_results[all_results[[management_col]] %in% optimal_managements, ]
   plot_data <- optimal_rows %>%
     tidyr::pivot_longer(cols = dplyr::all_of(obj_col), names_to = "objective", values_to = "value")
