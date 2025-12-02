@@ -277,7 +277,9 @@ Djahangard, M. and Yousefpour, R. (2025). FoRDM: Forest Many-Objective Robust De
 ## Funding
 This work was funded by the HORIZON EUROPE's project "eco2adapt" (Ecosystem-based Adaptation and Changemaking to Shape, Protect, and Sustain the Resilience of Tomorrow's Forests, Grant no: 101059498).
 
-<img src="figures/e2aLogoEU.png" alt="e2a logo" width="200"/>
+<img src="figures/e2aLogoEU.png" alt="e2a logo" width="300"/>
+
+<img src="figures/uni_logo.png" alt="e2a logo" width="200"/>
 
 ## Acknowledgment
 The authors thank the EU Horizon 2020 project "DecisionES" (Decision Support for the Supply of Ecosystem Services under Global Change, Grant no: 101007950) for supporting this work.
@@ -309,6 +311,7 @@ Seidl, R., Thom, D., Kautz, M., Martin-Benito, D., Peltoniemi, M., Vacchiano, G.
 
 
 Yousefpour, R. and Hanewinkel, M.: Climate Change and Decision-Making Under Uncertainty, Curr Forestry Rep, 2, 143–149, https://doi.org/10.1007/s40725-016-0035-y, 2016.
+
 
 
 
