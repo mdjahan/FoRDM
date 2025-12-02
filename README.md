@@ -282,7 +282,7 @@ This work was funded by the HORIZON EUROPE's project "eco2adapt" (Ecosystem-base
 <img src="figures/uni_logo.png" alt="e2a logo" width="200"/>
 
 ## Acknowledgment
-The authors thank the EU Horizon 2020 project "DecisionES" (Decision Support for the Supply of Ecosystem Services under Global Change, Grant no: 101007950) for supporting this work.
+The authors thank the EU Horizon 2020 project "DecisionES" (Decision Support for the Supply of Ecosystem Services under Global Change, Grant no: 101007950) for supporting this work. The authors would also like to thank Victor Jorquera Olave, Nora Felber, and Marc Hanewinkel for their valuable discussions on the development of FoRDM.
 
 ## References
 Armstrong McKay, D. I., Staal, A., Abrams, J. F., Winkelmann, R., Sakschewski, B., Loriani, S., Fetzer, I., Cornell, S. E., Rockström, J., and Lenton, T. M.: Exceeding 1.5°C global warming could trigger multiple climate tipping points, Science, 377, eabn7950, https://doi.org/10.1126/science.abn7950, 2022.
@@ -311,6 +311,7 @@ Seidl, R., Thom, D., Kautz, M., Martin-Benito, D., Peltoniemi, M., Vacchiano, G.
 
 
 Yousefpour, R. and Hanewinkel, M.: Climate Change and Decision-Making Under Uncertainty, Curr Forestry Rep, 2, 143–149, https://doi.org/10.1007/s40725-016-0035-y, 2016.
+
 
 
 
