@@ -1076,7 +1076,10 @@ robustness_tradeoff_analysis <- function(fordm_table, objectives) {
   switch_indices <- match(best_mgmt_tracker_unique, best_mgmt_tracker)[-1]
   #only include robustness recommendations until 50% robustness
   for(i in seq_along(switch_indices)){
-    if(switch_indices[i]>11) switch_indices <- switch_indices[-i]
+    if(switch_indices[i]>11){
+      switch_indices <- switch_indices[-i]
+      best_mgmt_tracker_unique <- best_mgmt_tracker_unique[-(i+1)]
+    }
   }
   #Add first output for initial management
   if(length(switch_indices) >= 1){
@@ -1218,5 +1221,6 @@ robustness_tradeoff_analysis <- function(fordm_table, objectives) {
 
   return(list(summary = summary_list, plot = plot))
 }
+
 
 
