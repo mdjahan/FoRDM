@@ -9,8 +9,8 @@ bibentry(
   ),
   year    = "2026",
   note    = "R package version 1.0.2",
-  doi     = "10.5281/zenodo.17738073",
-  url     = "https://doi.org/10.5281/zenodo.17738073",
+  doi     = "10.5281/zenodo.17749153",
+  url     = "https://doi.org/10.5281/zenodo.17749153",
   textVersion = "Djahangard, M. and Yousefpour, R. (2025). FoRDM: Forest Many-Objective Robust Decision Making Toolkit. R package version 1.0.2. doi:10.5281/zenodo.17749153"
 )
 

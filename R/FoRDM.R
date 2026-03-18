@@ -486,10 +486,13 @@ visualize_fordm_2d <- function(analysis_output, x, y, fordm_method) {
       ggplot2::theme_bw() +
       ggplot2::theme(
         plot.title = ggplot2::element_text(size = 17, face = "bold"),
+        plot.subtitle = ggplot2::element_text(size = 15),
         axis.title.x = ggplot2::element_text(size = 16),
         axis.title.y = ggplot2::element_text(size = 16),
         axis.text.x = ggplot2::element_text(size = 16),
-        axis.text.y = ggplot2::element_text(size = 16)
+        axis.text.y = ggplot2::element_text(size = 16),
+        legend.title = ggplot2::element_text(size = 16),
+        legend.text = ggplot2::element_text(size = 15)
       )
   } else if(fordm_method == "regret"){
     me <- analysis_output$method
@@ -520,6 +523,7 @@ visualize_fordm_2d <- function(analysis_output, x, y, fordm_method) {
       ggplot2::theme_bw() +
       ggplot2::theme(
         plot.title = ggplot2::element_text(size = 17, face = "bold"),
+        plot.subtitle = ggplot2::element_text(size = 15),
         axis.title.x = ggplot2::element_text(size = 16),
         axis.title.y = ggplot2::element_text(size = 16),
         axis.text.x = ggplot2::element_text(size = 16),
@@ -1181,12 +1185,12 @@ robustness_tradeoff_analysis <- function(fordm_table, objectives,robustness_min 
         for (obj in obj_col) {
           bdiffs <- benefit_diffs[[prev_mgmt]][[obj]]
           ldiffs <- loss_diffs[[prev_mgmt]][[obj]]
-          benefit_stats[[paste0(prev_mgmt, "_", obj, "_benefit_min")]] <- if(length(bdiffs)) min(bdiffs, na.rm = TRUE) else NA
-          benefit_stats[[paste0(prev_mgmt, "_", obj, "_benefit_mean")]] <- if(length(bdiffs)) mean(bdiffs, na.rm = TRUE) else NA
-          benefit_stats[[paste0(prev_mgmt, "_", obj, "_benefit_max")]] <- if(length(bdiffs)) max(bdiffs, na.rm = TRUE) else NA
-          loss_stats[[paste0(prev_mgmt, "_", obj, "_loss_min")]] <- if(length(ldiffs)) min(ldiffs, na.rm = TRUE) else NA
-          loss_stats[[paste0(prev_mgmt, "_", obj, "_loss_mean")]] <- if(length(ldiffs)) mean(ldiffs, na.rm = TRUE) else NA
-          loss_stats[[paste0(prev_mgmt, "_", obj, "_loss_max")]] <- if(length(ldiffs)) max(ldiffs, na.rm = TRUE) else NA
+          benefit_stats[[paste0(prev_mgmt, "_", obj, "_lowest_benefit")]] <- if(length(bdiffs)) min(bdiffs, na.rm = TRUE) else NA
+          benefit_stats[[paste0(prev_mgmt, "_", obj, "_mean_benefit")]] <- if(length(bdiffs)) mean(bdiffs, na.rm = TRUE) else NA
+          benefit_stats[[paste0(prev_mgmt, "_", obj, "_highest_benefit")]] <- if(length(bdiffs)) max(bdiffs, na.rm = TRUE) else NA
+          loss_stats[[paste0(prev_mgmt, "_", obj, "_lowest_loss")]] <- if(length(ldiffs)) max(ldiffs, na.rm = TRUE) else NA
+          loss_stats[[paste0(prev_mgmt, "_", obj, "_mean_loss")]] <- if(length(ldiffs)) mean(ldiffs, na.rm = TRUE) else NA
+          loss_stats[[paste0(prev_mgmt, "_", obj, "_highest_loss")]] <- if(length(ldiffs)) min(ldiffs, na.rm = TRUE) else NA
         }
       }
   
@@ -1222,7 +1226,7 @@ robustness_tradeoff_analysis <- function(fordm_table, objectives,robustness_min 
     tidyr::pivot_longer(cols = dplyr::all_of(obj_col), names_to = "objective", values_to = "value")
   #Barplot: mean value per management per objective
   plot <- ggplot2::ggplot(plot_data, ggplot2::aes(x = .data[[management_col]], y = value)) +
-    ggplot2::geom_point(ggplot2::aes(fill = robustness_level*100), shape = 21, color = "black", stroke = 0.1, size = 4) +
+    ggplot2::geom_point(ggplot2::aes(fill = robustness_level*100), shape = 21, alpha=0.8,color = "black", stroke = 0.1, size = 4.4) +
     ggplot2::facet_wrap(~objective, scales = "free_y") +
     ggplot2::labs(
       title = "Expected Objective Values for Optimal Managements Across Robustness Range",
@@ -1234,12 +1238,14 @@ robustness_tradeoff_analysis <- function(fordm_table, objectives,robustness_min 
      colors = RColorBrewer::brewer.pal(n = 10, name = "RdYlGn"),
      name = "Robustness [%]")+
     ggplot2::theme(
-      strip.text = ggplot2::element_text(size = 14, face = "bold"),
+      strip.text = ggplot2::element_text(size = 18, face = "bold"),
       plot.title = ggplot2::element_text(size = 17, face = "bold"),
-      axis.title.x = ggplot2::element_text(size = 16),
-      axis.title.y = ggplot2::element_text(size = 16),
-      axis.text.x = ggplot2::element_text(size = 14, angle = 45, hjust = 1),
-      axis.text.y = ggplot2::element_text(size = 14)
+      axis.title.x = ggplot2::element_text(size = 18),
+      axis.title.y = ggplot2::element_text(size = 18),
+      axis.text.x = ggplot2::element_text(size = 17, angle = 45, hjust = 1),
+      axis.text.y = ggplot2::element_text(size = 17),
+      legend.title = ggplot2::element_text(size = 16),
+      legend.text = ggplot2::element_text(size = 15)
     )
 
   return(list(summary = summary_list, plot = plot))
