@@ -4,12 +4,24 @@
 \alias{robustness_tradeoff_analysis}
 \title{Robustness Trade-Off Analysis (Regret-based)}
 \usage{
-robustness_tradeoff_analysis(fordm_table, objectives)
+robustness_tradeoff_analysis(
+  fordm_table,
+  objectives,
+  robustness_min = 0,
+  robustness_max = 1,
+  robustness_step = 0.05
+)
 }
 \arguments{
 \item{fordm_table}{Output from build_FoRDM_table().}
 
 \item{objectives}{Output from build_objectives_regret().}
+
+\item{robustness_min}{Minimum robustness level (default: 0.0 = 0\%).}
+
+\item{robustness_max}{Maximum robustness level (default: 1.0 = 100\%).}
+
+\item{robustness_step}{Step size for robustness levels (default: 0.05 = 5\%-steps).}
 }
 \value{
 List containing the list of optimal managements at certain robustness levels, and a plot

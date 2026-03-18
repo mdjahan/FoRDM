@@ -7,11 +7,11 @@ bibentry(
     person(given = "M.", family = "Djahangard", role = c("aut","cre")),
     person(given = "R.", family = "Yousefpour", role = "aut")
   ),
-  year    = "2025",
-  note    = "R package version 1.0.0",
+  year    = "2026",
+  note    = "R package version 1.0.2",
   doi     = "10.5281/zenodo.17749153",
   url     = "https://doi.org/10.5281/zenodo.17749153",
-  textVersion = "Djahangard, M. and Yousefpour, R. (2025). FoRDM: Forest Many-Objective Robust Decision Making Toolkit. R package version 1.0.0. doi:10.5281/zenodo.17749153"
+  textVersion = "Djahangard, M. and Yousefpour, R. (2025). FoRDM: Forest Many-Objective Robust Decision Making Toolkit. R package version 1.0.2. doi:10.5281/zenodo.17749153"
 )
 
 citFooter("Also cite R itself: see citation() in R.")
