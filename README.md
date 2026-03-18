@@ -1,4 +1,4 @@
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.17749153.svg)](https://doi.org/10.5281/zenodo.17749153)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.17738073.svg)](https://doi.org/10.5281/zenodo.17738073)
 
 <img src="figures/fordm_logo.png" alt="FoRDM logo" width="200"/>
 
