@@ -191,11 +191,14 @@ Creates a parallel coordinates plot showing SOW (State-of-the-World) performance
 ---
 
 ### **robustness_tradeoff_analysis()**
-Explores trade-offs when relaxing robustness for better performance in regret-based FoRDM analysis. Sweeps robustness levels (0-100%), selects the optimal management at each level, tracks switches in optimal management, and summarizes marginal benefits/losses per objective.
+Explores trade-offs when relaxing robustness for better performance in regret-based FoRDM analysis. Sweeps robustness levels, selects the optimal management at each level, tracks switches in optimal management, and summarizes marginal benefits/losses per objective.
 
 **Inputs**
 - `fordm_table`: output from `build_fordm_table()`.  
-- `objectives`: output from `build_objectives_regret()`.  
+- `objectives`: output from `build_objectives_regret()`. 
+- `robustness_min`: Minimum robustness level (default: 0.0).
+- `robustness_max`: Maximum robustness level (default: 1.0).
+- `robustness_step`: Step size for robustness levels (default: 0.05).
 
 **Output**
 - A `list` with:
