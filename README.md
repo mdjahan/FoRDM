@@ -223,18 +223,22 @@ fordm_table <- build_fordm_table(df, management="management", sow="scenario", ti
 #Regret based approach
 #Define objectives
 objectives_regret <- build_objectives_regret(
-      names = c("objective1","objective2","objective3"),
-      direction = c("maximize","maximize","maximize"),
-      weights = c(0.5,0.25,0.25),
-      time_aggregation = c("sum","mean","mean"),
-      discount_rate = c(0.02,0,0))
-#Run the regret robustness analysis
-output_fordm_regret <- fordm_analysis_regret(fordm_table = fordm_table,
+  names = c("objective1","objective2","objective3"),
+  direction = c("maximize","maximize","maximize"),
+  weights = c(0.6,0.2,0.2),
+  time_aggregation = c("sum","min","min"),
+  discount_rate = c(0.02,0,0))
+#Run the regret robustness analysis (Regret Type II or CVaR)
+output_fordm_regretII <- fordm_analysis_regret(fordm_table = fordm_table,
                                 objectives = objectives_regret,
                                 robustness = 0.9)
+output_fordm_regretCVaR <- fordm_analysis_regret(fordm_table = fordm_table,
+                                               objectives = objectives_regret,
+                                               robustness = 0.9,
+                                               method="CVaR")
 #output
-output_fordm_regret$optimal
-output_fordm_regret$pareto_front
+output_fordm_regretII
+output_fordm_regretCVaR
 
 #visualize regret output
 visualize_fordm_2d(output_fordm_regret,x="objective1",y="objective2",fordm_method = "regret")
@@ -253,10 +257,9 @@ objectives_satisficing <- build_objectives_satisficing(
 #Run the satisficing robustness analysis
 output_fordm_satisficing <- fordm_analysis_satisficing(fordm_table = fordm_table,
                                              objectives = objectives_satisficing,
-                                             robustness = 0.8)
+                                             robustness = 0.9)
 #output
-output_fordm_satisficing$optimal
-output_fordm_satisficing$pareto_front
+output_fordm_satisficing
 
 #visualize satisficing output
 visualize_fordm_2d(output_fordm_satisficing,x="objective1",y="objective2",fordm_method = "satisficing")
@@ -266,10 +269,10 @@ visualize_fordm_parcoord_management(fordm_table, objectives_satisficing, fordm_m
 
 #Robustness Trade-Off Analysis
 output_rta <- robustness_tradeoff_analysis(fordm_table = fordm_table,
-                                           objectives = objectives_regret)
+                                           objectives = objectives_regret,
+                                           robustness_min = 0.8, robustness_max = 1.0,robustness_step = 0.01)
 #output
-output_rta$summary
-output_rta$plot
+output_rta
 ```
 
 ---
