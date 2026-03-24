@@ -4,7 +4,7 @@
 \alias{build_fordm_table}
 \title{Build FoRDM Table}
 \usage{
-build_fordm_table(data, management, sow, time, time_unit = "years")
+build_fordm_table(data, management, sow, time)
 }
 \arguments{
 \item{data}{A data.frame containing the input data.}
@@ -14,8 +14,6 @@ build_fordm_table(data, management, sow, time, time_unit = "years")
 \item{sow}{The name of the state-of-the-worlds (SOW) column.}
 
 \item{time}{The name of the time column.}
-
-\item{time_unit}{The unit of time used in the time column. Options are "years" (default) or "decades".}
 }
 \value{
 A list with the processed data for further use in the FoRDM analysis, including the input data, mapping for identification of columns and objective columns.
