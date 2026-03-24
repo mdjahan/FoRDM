@@ -53,14 +53,13 @@ Example column structure:
 ## Functions
 
 ### **build_fordm_table()**
-Transforms a given input file (`data.frame`) into the required FoRDM input format. Identifies columns for management, SOW (state-of-world), and time, treating all other columns as objectives. Also needs definition of the time unit.
+Transforms a given input file (`data.frame`) into the required FoRDM input format. Identifies columns for management, SOW (state-of-world), and time, treating all other columns as objectives.
 
 **Inputs**
 - `data`: `data.frame` containing the input data.  
 - `management`: name of the management column in the input data.  
 - `sow`: name of the SOW (state-of-world) column in the input data.  
 - `time`: name of the time column in the input data.
-- `time_unit`: unit of time used in the time column. Options are "years" (default) or "decades". 
 
 **Output**
 - A list containing the formatted table for analysis, including the input data, mapping for identification of columns, and objective columns.
@@ -218,7 +217,7 @@ library(FoRDM)
 df <- read.csv("YOUR_DATA.csv")
 
 #Define data frame structure for processing in FoRDM
-fordm_table <- build_fordm_table(df, management="management", sow="scenario", time="decade", time_unit = "years")
+fordm_table <- build_fordm_table(df, management="management", sow="scenario", time="decade")
 
 #Regret based approach
 #Define objectives
