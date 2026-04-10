@@ -1,7 +1,5 @@
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.17738073.svg)](https://doi.org/10.5281/zenodo.17738073)
 
-![FoRDM logo](fordm_logo.png)
-
 # FoRDM
 
 **Fo**rest Many-Objective **R**obust **D**ecision **M**aking (**FoRDM**) is an R-based toolkit for supporting robust forest management under deep uncertainty. **FoRDM** provides a forestry-focused, user-friendly application of MORDM to forest simulation outputs. It supports regret- and satisficing-based robustness, objective weighting, time aggregation, and robustness preferences. **FoRDM** identifies robust solutions, generates Pareto fronts, and offers interactive 2D, 3D, and parallel-coordinate visualizations. An analytical module highlights trade-offs between robustness and performance.
@@ -40,8 +38,6 @@ Yet, MORDM has seen limited adoption in forestry because existing tools are ofte
 
 ## Structure
 Main implementation is an R package. This package provides helpers to build input tables and objectives, run robustness analyses (regret-based and satisficing-based), and visualize results (2D, 3D & Parallel Coordinate Pareto fronts) as well as a robustness trade-off analysis.
-
-#![Structure of FoRDM](figures/structure.svg)
 
 ## Input file
 The input file (.csv) should contain pre-processed outputs from a forest simulation model. These data need to be structured so that each row represents a combination of management alternative, state of the world (SOW), time step, and one or more objective values. States of the world can reflect any sources of uncertainty specified by the user—such as climate projections, socioeconomic pathways, or model parameter variability—while management alternatives represent the different strategies evaluated in the simulation. Objective columns capture performance indicators of interest, for example ecosystem services, economic returns, or other measures used to compare strategies. The user is responsible for preparing these inputs in advance, including defining the set of management options, specifying uncertainties, and calculating the objective outcomes that will be used for the robustness analysis.
@@ -140,8 +136,6 @@ Generates a 2D scatter plot of the Pareto front for two selected objectives usin
 **Output**
 - A `ggplot2` plot visualizing the 2D Pareto front with management labels.
 
-#![2d plot](2d_plot.png)
-
 ---
 
 ### **visualize_fordm_3d()**
@@ -155,8 +149,6 @@ Creates an interactive 3D Pareto front plot using `plotly` for three selected ob
 **Output**
 - A `plotly` plot (interactive 3D scatter plot) visualizing the Pareto front.
 
-#![3d plot](figures/3d_plot.png)
-
 ---
 
 ### **visualize_fordm_parcoord()**
@@ -168,8 +160,6 @@ Creates a parallel coordinates plot of the Pareto front across all objectives us
 
 **Output**
 - A `plotly` parallel coordinates plot visualizing the Pareto front across all objectives. In satisficing mode, lines are colored by robustness percentage.
-
-#![parcoord plot](figures/parcoord.png)
 
 ---
 
@@ -184,8 +174,6 @@ Creates a parallel coordinates plot showing SOW (State-of-the-World) performance
 
 **Output**
 - A `plotly` parallel coordinates plot showing how the selected management performs across different SOWs, with each line representing one SOW scenario.
-
-#![parcoord management plot](figures/parcoord_management.png)
 
 ---
 
@@ -203,8 +191,6 @@ Explores trade-offs when relaxing robustness for better performance in regret-ba
 - A `list` with:
   - `summary`: list of data.frames. First entry gives the initial optimal management and its robustness range; subsequent entries correspond to switches and include `robustness_range`, `optimal_management`, and per-objective benefit/loss stats (`<prev_mgmt>_<objective>_benefit_min/mean/max`, `<prev_mgmt>_<objective>_loss_min/mean/max`).
   - `plot`: a ggplot2 scatter plot showing objective values for optimal managements across robustness levels (0-100%).
-
-#![rta plot](figures/rta_plot.png)
 
 ---
 
@@ -277,14 +263,11 @@ output_rta
 ---
 
 ## Citation
-Djahangard, M. and Yousefpour, R. (2025). FoRDM: Forest Many-Objective Robust Decision Making Toolkit. R package version 1.0.0. doi:10.5281/zenodo.17738074
+Djahangard, M. and Yousefpour, R. (2025). FoRDM: Forest Many-Objective Robust Decision Making Toolkit. R package version 1.0.2. doi:10.5281/zenodo.17738073
 
 ## Funding
 This work was funded by the HORIZON EUROPE's project "eco2adapt" (Ecosystem-based Adaptation and Changemaking to Shape, Protect, and Sustain the Resilience of Tomorrow's Forests, Grant no: 101059498).
 
-#<img src="figures/e2aLogoEU.png" alt="e2a logo" width="300"/>
-
-#<img src="figures/uni_logo.png" alt="e2a logo" width="200"/>
 
 ## Acknowledgment
 The authors thank the EU Horizon 2020 project "DecisionES" (Decision Support for the Supply of Ecosystem Services under Global Change, Grant no: 101007950) for supporting this work. The authors would also like to thank Victor Jorquera Olave, Nora Felber, and Marc Hanewinkel for their valuable discussions on the development of FoRDM.
