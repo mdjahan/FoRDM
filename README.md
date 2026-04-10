@@ -140,7 +140,7 @@ Generates a 2D scatter plot of the Pareto front for two selected objectives usin
 **Output**
 - A `ggplot2` plot visualizing the 2D Pareto front with management labels.
 
-![2d plot](figures/2d_plot.png)
+![2d plot](2d_plot.png)
 
 ---
 
