@@ -43,8 +43,12 @@ Yet, MORDM has seen limited adoption in forestry because existing tools are ofte
 ## Structure
 Main implementation is an R package. This package provides helpers to build input tables and objectives, run robustness analyses (regret-based and satisficing-based), and visualize results (2D, 3D & Parallel Coordinate Pareto fronts) as well as a robustness trade-off analysis.
 
+<p align="left">
+  <img src="figures/structure.svg" width="600">
+</p>
+
 ## Input file
-The input file (.csv) should contain pre-processed outputs from a forest simulation model. These data need to be structured so that each row represents a combination of management alternative, state of the world (SOW), time step, and one or more objective values. States of the world can reflect any sources of uncertainty specified by the user—such as climate projections, socioeconomic pathways, or model parameter variability—while management alternatives represent the different strategies evaluated in the simulation. Objective columns capture performance indicators of interest, for example ecosystem services, economic returns, or other measures used to compare strategies. The user is responsible for preparing these inputs in advance, including defining the set of management options, specifying uncertainties, and calculating the objective outcomes that will be used for the robustness analysis.
+The input file (.csv) should contain pre-processed outputs from a forest simulation model. These data need to be structured so that each row represents a combination of management alternative, state of the world (SOW), and one or more objective values. States of the world can reflect any sources of uncertainty specified by the user—such as climate projections, socioeconomic pathways, or model parameter variability—while management alternatives represent the different strategies evaluated in the simulation. Objective columns capture performance indicators of interest, for example ecosystem services, economic returns, or other measures used to compare strategies. The user is responsible for preparing these inputs in advance, including defining the set of management options, specifying uncertainties, and calculating the objective outcomes that will be used for the robustness analysis.
 
 Example column structure:
 | management | sow | time | objective1 | objective2 | ... |
@@ -140,6 +144,9 @@ Generates a 2D scatter plot of the Pareto front for two selected objectives usin
 **Output**
 - A `ggplot2` plot visualizing the 2D Pareto front with management labels.
 
+<p align="left">
+  <img src="figures/2d_plot.png" width="600">
+</p>
 ---
 
 ### **visualize_fordm_3d()**
@@ -153,6 +160,9 @@ Creates an interactive 3D Pareto front plot using `plotly` for three selected ob
 **Output**
 - A `plotly` plot (interactive 3D scatter plot) visualizing the Pareto front.
 
+<p align="left">
+  <img src="figures/3d_plot.png" width="600">
+</p>
 ---
 
 ### **visualize_fordm_parcoord()**
@@ -165,6 +175,9 @@ Creates a parallel coordinates plot of the Pareto front across all objectives us
 **Output**
 - A `plotly` parallel coordinates plot visualizing the Pareto front across all objectives. In satisficing mode, lines are colored by robustness percentage.
 
+<p align="left">
+  <img src="figures/parcoord.png" width="600">
+</p>
 ---
 
 ### **visualize_fordm_parcoord_management()**
@@ -179,6 +192,9 @@ Creates a parallel coordinates plot showing SOW (State-of-the-World) performance
 **Output**
 - A `plotly` parallel coordinates plot showing how the selected management performs across different SOWs, with each line representing one SOW scenario.
 
+<p align="left">
+  <img src="figures/parcoord_management.png" width="600">
+</p>
 ---
 
 ### **robustness_tradeoff_analysis()**
@@ -196,6 +212,10 @@ Explores trade-offs when relaxing robustness for better performance in regret-ba
   - `summary`: list of data.frames. First entry gives the initial optimal management and its robustness range; subsequent entries correspond to switches and include `robustness_range`, `optimal_management`, and per-objective benefit/loss stats (`<prev_mgmt>_<objective>_benefit_min/mean/max`, `<prev_mgmt>_<objective>_loss_min/mean/max`).
   - `plot`: a ggplot2 scatter plot showing objective values for optimal managements across robustness levels (0-100%).
 
+<p align="left">
+  <img src="figures/rta_plot.png" width="600">
+</p>
+
 ---
 
 ## Example
@@ -207,7 +227,7 @@ library(FoRDM)
 df <- read.csv("YOUR_DATA.csv")
 
 #Define data frame structure for processing in FoRDM
-fordm_table <- build_fordm_table(df, management="management", sow="scenario", time="decade")
+fordm_table <- build_fordm_table(df, management="management", sow="scenario")
 
 #Regret based approach
 #Define objectives
@@ -254,7 +274,7 @@ output_fordm_satisficing
 visualize_fordm_2d(output_fordm_satisficing,x="objective1",y="objective2",fordm_method = "satisficing")
 visualize_fordm_3d(output_fordm_satisficing,x="objective1",y="objective2",z="objective3",fordm_method = "satisficing")
 visualize_fordm_parcoord(output_fordm_satisficing, fordm_method = "satisficing")
-visualize_fordm_parcoord_management(fordm_table, objectives_satisficing, fordm_method = "satisficing",management="M2")
+visualize_fordm_parcoord_management(fordm_table, objectives_satisficing, fordm_method = "satisficing",management="Adaptive1")
 
 #Robustness Trade-Off Analysis
 output_rta <- robustness_tradeoff_analysis(fordm_table = fordm_table,
@@ -272,6 +292,9 @@ Djahangard, M. and Yousefpour, R. (2025). FoRDM: Forest Many-Objective Robust De
 ## Funding
 This work was funded by the HORIZON EUROPE's project "eco2adapt" (Ecosystem-based Adaptation and Changemaking to Shape, Protect, and Sustain the Resilience of Tomorrow's Forests, Grant no: 101059498).
 
+<p align="left">
+  <img src="figures/logo.png" width="200">
+</p>
 
 ## Acknowledgment
 The authors thank the EU Horizon 2020 project "DecisionES" (Decision Support for the Supply of Ecosystem Services under Global Change, Grant no: 101007950) for supporting this work. The authors would also like to thank Victor Jorquera Olave, Nora Felber, and Marc Hanewinkel for their valuable discussions on the development of FoRDM.
