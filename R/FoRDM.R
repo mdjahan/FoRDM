@@ -7,7 +7,7 @@
 #' @importFrom stats quantile as.formula ecdf
 #' @importFrom emoa nondominated_points
 #' @importFrom utils globalVariables
-#' @importFrom RColorBrewer brewer.pal
+#' @importFrom wesanderson wes_palettes
 NULL
 
 #Suppress notes about global variables used in dplyr/ggplot2
@@ -468,7 +468,7 @@ visualize_fordm_2d <- function(analysis_output, x, y, fordm_method) {
       ggplot2::ylim(y_min, y_max) +
       ggplot2::xlim(x_min, x_max) +
       ggplot2::scale_fill_gradientn(
-        colors = RColorBrewer::brewer.pal(n = 10, name = 'RdYlGn'),
+        colors = wesanderson::wes_palette("Zissou1", type = "continuous"),
         values = seq(0, 1, length.out = 10),
         limits = c(60, 100)) +
       ggplot2::theme_bw() +
@@ -496,7 +496,7 @@ visualize_fordm_2d <- function(analysis_output, x, y, fordm_method) {
     ggplot2::ggplot(df, ggplot2::aes(x = .data[[x]], y = .data[[y]])) +
       ggplot2::geom_point(aes(fill=ro),shape = 21, size = 8, color = "black", stroke = 1, alpha = 0.6)+
       scale_fill_gradientn(
-        colors = RColorBrewer::brewer.pal(n = 10, name = "RdYlGn"),
+        colors = wesanderson::wes_palette("Zissou1", type = "continuous"),
         limits = c(0, 1)
       )+
       ggplot2::geom_text(ggplot2::aes(label = .data[["management"]]), hjust = 0.5, vjust = -0.85, size = 5) +
@@ -550,7 +550,7 @@ visualize_fordm_3d <- function(analysis_output, x, y, z, fordm_method) {
     ro <- analysis_output$robustness
     title <- "3D FoRDM Pareto Front (Satisficing)"
     subtitle <- paste0("objective values at ",ro*100,"% robustness")
-    color <- RColorBrewer::brewer.pal(10, "RdYlGn")
+    color <- wesanderson::wes_palette("Zissou1", type = "continuous")
     colorscale <- lapply(seq_along(color), function(i) {
       list((i - 1) / (length(color) - 1), color[i])
     })
@@ -607,7 +607,7 @@ visualize_fordm_3d <- function(analysis_output, x, y, z, fordm_method) {
       title <- "3D FoRDM Pareto Front (CVaR)"
       subtitle <- paste0("CVaR per objective of ", (1-ro)*100, "% worst SOWs")
     }
-    color <- RColorBrewer::brewer.pal(10, "RdYlGn")
+    color <- wesanderson::wes_palette("Zissou1", type = "continuous")
     ro_color <- color[round(ro * (9)) + 1 ]
     plotly::plot_ly(
       df,
@@ -677,7 +677,7 @@ visualize_fordm_parcoord <- function(analysis_output, fordm_method) {
     })
     me <- analysis_output$method
     ro <- analysis_output$robustness
-    color <- RColorBrewer::brewer.pal(10, "RdYlGn")
+    color <- wesanderson::wes_palette("Zissou1", type = "continuous")
     ro_color <- color[round(ro * (9)) + 1 ]
     if (me == "regretII") {
       title <- "Parallel Coordinates Plot (Regret II)"
@@ -724,7 +724,7 @@ visualize_fordm_parcoord <- function(analysis_output, fordm_method) {
       tickvals = c(0, 100),
       ticktext = c("0", "100")
     )
-    color <- RColorBrewer::brewer.pal(10, "RdYlGn")
+    color <- wesanderson::wes_palette("Zissou1", type = "continuous")
     colorscale <- lapply(seq_along(color), function(i) {
       list((i - 1) / (length(color) - 1), color[i])
     })
@@ -864,7 +864,7 @@ visualize_fordm_parcoord_management <- function(fordm_table, objectives, fordm_m
       ticktext = ticktext
     )
     #plot
-    color <- RColorBrewer::brewer.pal(10, "RdYlGn")
+    color <- wesanderson::wes_palette("Zissou1", type = "continuous")
     colorscale <- lapply(seq_along(color), function(i) {
       list((i - 1) / (length(color) - 1), color[i])
     })
@@ -942,8 +942,10 @@ visualize_fordm_parcoord_management <- function(fordm_table, objectives, fordm_m
       line = list(
         color = ~ifelse(all_satisfied, 1, 0),
         colorscale = list(
-          list(0, "#D73027"),
-          list(1, "#66BD63")
+          list(0, "#F21A00FF"),
+          list(0.5, "#F21A00FF"),
+          list(0.5, "#3B9AB2FF"),
+          list(1, "#3B9AB2FF")
         ),
         cmin = 0,
         cmax = 1,
@@ -1223,7 +1225,7 @@ robustness_tradeoff_analysis <- function(fordm_table, objectives,robustness_min 
     ) +
     ggplot2::theme_bw() +
    ggplot2::scale_fill_gradientn(
-     colors = RColorBrewer::brewer.pal(n = 10, name = "RdYlGn"),
+     colors = wesanderson::wes_palette("Zissou1", type = "continuous"),
      name = "Robustness [%]")+
     ggplot2::theme(
       strip.text = ggplot2::element_text(size = 18, face = "bold"),
