@@ -203,11 +203,10 @@ fordm_analysis_regret <- function(fordm_table, objectives, robustness = 0.9, met
       dplyr::select(-c(regret_quantile))
   } else stop("Unkown method")
 
-  #5. Find optimal management (minimizing regret), including a tolerance to include near-optimal management
-  tolerance <- 0.01 #1%
+  #5. Find optimal management (minimizing regret)
   min_regret <- min(df_final$regret_scalar, na.rm = TRUE)
   optimal <- df_final %>%
-    dplyr::filter(regret_scalar <= min_regret * (1 + tolerance))
+    dplyr::filter(regret_scalar <= min_regret)
 
   #6. Calculate Pareto front based on regret per objective
   indicator_columns <- grep('^regret_', names(df_final), value = TRUE)

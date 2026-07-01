@@ -1,17 +1,24 @@
 citHeader("To cite FoRDM in publications, please use:")
 
 bibentry(
-  bibtype = "Manual",
-  title   = "FoRDM: Forest Many-Objective Robust Decision Making Toolkit",
+  bibtype = "Article",
+  title   = "FoRDM: A toolkit for robust many-objective optimization to support forest decision-making under climate change",
   author  = c(
-    person(given = "M.", family = "Djahangard", role = c("aut","cre")),
-    person(given = "R.", family = "Yousefpour", role = "aut")
+    person(given = "Marc", family = "Djahangard"),
+    person(given = "Rasoul", family = "Yousefpour")
   ),
+  journal = "Ecological Informatics",
   year    = "2026",
-  note    = "R package version 1.0.2",
-  doi     = "10.5281/zenodo.17749153",
-  url     = "https://doi.org/10.5281/zenodo.17749153",
-  textVersion = "Djahangard, M. and Yousefpour, R. (2025). FoRDM: Forest Many-Objective Robust Decision Making Toolkit. R package version 1.0.2. doi:10.5281/zenodo.17749153"
+  volume  = "97",
+  pages   = "103903",
+  doi     = "10.1016/j.ecoinf.2026.103903",
+  url     = "https://doi.org/10.1016/j.ecoinf.2026.103903",
+  textVersion = paste(
+    "Djahangard, M., & Yousefpour, R. (2026).",
+    "FoRDM: A toolkit for robust many-objective optimization to support forest decision-making under climate change.",
+    "Ecological Informatics, 97, 103903.",
+    "https://doi.org/10.1016/j.ecoinf.2026.103903"
+  )
 )
 
 citFooter("Also cite R itself: see citation() in R.")
