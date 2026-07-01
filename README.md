@@ -8,7 +8,9 @@
 
 **Fo**rest Many-Objective **R**obust **D**ecision **M**aking (**FoRDM**) is an R-based toolkit for supporting robust forest management under deep uncertainty. **FoRDM** provides a forestry-focused, user-friendly application of MORDM to forest simulation outputs. It supports regret- and satisficing-based robustness, objective weighting, time aggregation, and robustness preferences. **FoRDM** identifies robust solutions, generates Pareto fronts, and offers interactive 2D, 3D, and parallel-coordinate visualizations. An analytical module highlights trade-offs between robustness and performance.
 
-FoRDM is available as an R package (presented here) and as an easy-to-access R Shiny web app. The web app can be accessed via this [link](https://marcdjahangard.shinyapps.io/fordm_app/).
+For a detailed description of the methodology and application of FoRDM, see: https://doi.org/10.1016/j.ecoinf.2026.103903
+
+FoRDM is available as an R package (presented here) and as an easy-to-access R Shiny web app. The web app can be accessed via this [link](https://fordm.shinyapps.io/fordm_app/).
 
 ## Table of Contents
 1. [Introduction](#introduction)  
@@ -287,7 +289,7 @@ output_rta
 ---
 
 ## Citation
-Djahangard, M. and Yousefpour, R. (2025). FoRDM: Forest Many-Objective Robust Decision Making Toolkit. R package version 1.0.2. doi:10.5281/zenodo.17738073
+Djahangard, M., & Yousefpour, R. (2026). FoRDM: A toolkit for robust many-objective optimization to support forest decision-making under climate change. Ecological Informatics, 97, 103903. https://doi.org/10.1016/j.ecoinf.2026.103903
 
 ## Funding
 This work was funded by the HORIZON EUROPE's project "eco2adapt" (Ecosystem-based Adaptation and Changemaking to Shape, Protect, and Sustain the Resilience of Tomorrow's Forests, Grant no: 101059498).
